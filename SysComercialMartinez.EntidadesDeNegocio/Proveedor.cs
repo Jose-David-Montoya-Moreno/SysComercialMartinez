@@ -33,6 +33,9 @@ namespace SysComercialMartinez.EntidadesDeNegocio
         [Required(ErrorMessage = "El Numero de Cuenta es obligatorio")]
         [StringLength(20, ErrorMessage = "Maximo 20 caracteres")]
         public string? NumeroCuenta { get; set; }
+
+        public List<Producto>? Productos { get; set; }
+
         [NotMapped]
         public int Top_Aux { get; set; }
     }

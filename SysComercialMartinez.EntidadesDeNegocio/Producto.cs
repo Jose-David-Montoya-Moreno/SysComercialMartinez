@@ -10,5 +10,58 @@ namespace SysComercialMartinez.EntidadesDeNegocio
 {
     public class Producto
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int IdProducto { get; set; }
+
+        [Required(ErrorMessage = "Codigo es obligatorio")]
+        public int Codigo { get; set; }
+
+        [Required(ErrorMessage = "Nombre es obligatorio")]
+        [StringLength(30, ErrorMessage = "Maximo 30 caracteres")]
+        public string Nombre { get; set; }
+
+        [Required(ErrorMessage = "Marca es obligatorio")]
+        [StringLength(30, ErrorMessage = "Maximo 50 caracteres")]
+        public string Marca { get; set; }
+
+        [Required(ErrorMessage = "Descripcion es obligatorio")]
+        [StringLength(50, ErrorMessage = "Maximo 50 caracteres")]
+        public string Descripcion { get; set; }
+
+        [Required(ErrorMessage = "Modelo o Serie es obligatorio")]
+        [StringLength(50, ErrorMessage = "Maximo 50 caracteres")]
+        public string ModeloSerie { get; set; }
+
+        [Required(ErrorMessage = "Garantia es obligatorio")]
+        [StringLength(50, ErrorMessage = "Maximo 50 caracteres")]
+        public string Garantia { get; set; }
+
+        [Required(ErrorMessage = "PrecioUnitario es obligatorio")]
+        public decimal PrecioUnitario { get; set; }
+
+        [Required(ErrorMessage = "la Cantidad es obligatorio")]
+        public int Cantidad { get; set; }
+
+        [ForeignKey("Proveedor")]
+        [Required(ErrorMessage = "Proveedor es obligatorio")]
+        [Display(Name = "Proveedor")]
+        public int IdProveedor { get; set; }
+
+        public Proveedor Proveedor { get; set; }
+
+        [ForeignKey("Categoria")]
+        [Required(ErrorMessage = "Categoria es obligatorio")]
+        [Display(Name = "Proveedor")]
+        public int IdCantegoria { get; set; }
+
+        public Categoria Categoria { get; set; }
+
+        public List<DetalleCompra>? DetalleCompra { get; set; }
+
+        public List<DetalleVenta>? DetalleVenta { get; set; }
+
+        [NotMapped]
+        public int Top_Aux { get; set; }
     }
 }

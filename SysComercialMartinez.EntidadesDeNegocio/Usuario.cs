@@ -33,7 +33,7 @@ namespace SysComercialMartinez.EntidadesDeNegocio
         public byte Estatus { get; set; }
         [Display(Name = "Fecha registro")]
         public DateTime FechaRegistro { get; set; }
-        public ICollection<Venta>? Factura { get; set; }
+        public ICollection<Venta>? Venta { get; set; }
         public ICollection<Compra>? Pedido { get; set; }
         public Rol Rol { get; set; }
         [NotMapped]
