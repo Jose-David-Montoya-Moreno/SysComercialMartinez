@@ -25,8 +25,9 @@ namespace SysComercialMartinez.AccesoADatos
 
             
         {
-            optionsBuilder.UseSqlServer(@"workstation id=BDComercialMartinez.mssql.somee.com; packet size = 4096; user id=José0407_SQLLogin_1; pwd=rz363vdvcw;data source=BDComercialMartinez.mssql.somee.com; persist security info=False;initial catalog=BDComercialMartinez;Encrypt=False;TrustServerCertificate=False;");
-            //optionsBuilder.UseSqlServer(@"Data Source=OSCARROMERO\SQLEXPRESS;Initial Catalog=SysInventarioFacturacion;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            //optionsBuilder.UseSqlServer(@"workstation id=SysInventarioFacturacion503.mssql.somee.com;packet size=4096;user id=romerooscar_SQLLogin_1;pwd=awaosafn8m;data source=SysInventarioFacturacion503.mssql.somee.com;persist security info=False;initial catalog=SysInventarioFacturacion503;Encrypt=False;TrustServerCertificate=False;");
+
+            optionsBuilder.UseSqlServer(@"workstation id=BDComercialMartinez.mssql.somee.com;packet size=4096;user id=José0407_SQLLogin_1;pwd=rz363vdvcw;data source=BDComercialMartinez.mssql.somee.com;persist security info=False;initial catalog=BDComercialMartinez;Encrypt=False;TrustServerCertificate=False;");
         }
 
     }

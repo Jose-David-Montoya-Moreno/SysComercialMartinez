@@ -11,6 +11,8 @@ namespace SysComercialMartinez.EntidadesDeNegocio
     public class Usuario
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public int Id { get; set; }
         [ForeignKey("Rol")]
         [Required(ErrorMessage = "Rol es obligatorio")]
