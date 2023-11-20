@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using SysComercialMartinez.EntidadesDeNegocio;
 using SysComercialMartinez.LogicaDeNegocio;
+using SysComercialMartinez.AccesoADatos;
+
 
 
 namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
