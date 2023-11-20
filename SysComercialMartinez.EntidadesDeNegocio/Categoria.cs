@@ -23,7 +23,7 @@ namespace SysComercialMartinez.EntidadesDeNegocio
 
         [Required(ErrorMessage = "Nombre es obligatorio")]
         [StringLength(30, ErrorMessage = "Maximo 30 caracteres")]
-        public string Descrpcion { get; set; }
+        public string Descripcion { get; set; }
 
         public List<Producto>? Productos { get; set; }
 

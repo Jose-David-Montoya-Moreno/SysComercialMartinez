@@ -17,7 +17,7 @@ using SysComercialMartinez.UI.AppWebAspNetCore.Models;
 
 namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 {
-    //[Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
     //[Authorize(Roles = "SuperAdmin")]
     public class UsuarioController : Controller
     {
