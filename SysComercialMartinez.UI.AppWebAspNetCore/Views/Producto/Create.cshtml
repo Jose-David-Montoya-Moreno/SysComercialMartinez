@@ -1,0 +1,155 @@
+﻿@model SysComercialMartinez.EntidadesDeNegocio.Producto
+
+@{
+    ViewData["Title"] = "Create";
+    List<SysComercialMartinez.EntidadesDeNegocio.Categoria> categorias = ViewBag.Categoria as List<SysComercialMartinez.EntidadesDeNegocio.Categoria>;
+    List<SysComercialMartinez.EntidadesDeNegocio.Proveedor> proveedores = ViewBag.Proveedor as List<SysComercialMartinez.EntidadesDeNegocio.Proveedor>;
+
+}
+
+<h1>Agregar Un Nuevo Producto</h1>
+<hr />
+
+<div>
+    <button class="btn btn-primary" style="background-color: #0074D9;">
+        <a asp-area="" asp-controller="Categoria" asp-action="Create" style="color: white; text-decoration: none;">
+            <i class="fas fa-plus"></i> Categoria
+        </a>
+    </button>
+
+    <button class="btn btn-success" style="background-color: #005626;">
+        <a asp-area="" asp-controller="Proveedor" asp-action="Create" style="color: white; text-decoration: none;">
+            <i class="fas fa-plus"></i> Proveedor
+        </a>
+    </button>
+</div>
+
+
+
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="form-group ">
+                <label asp-for="Codigo" class="control-label"></label>
+                <input asp-for="Codigo" class="form-control" />
+                <span asp-validation-for="Codigo" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Garantia" class="control-label"></label>
+                <input asp-for="Garantia" class="form-control" />
+                <span asp-validation-for="Garantia" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group ">
+                <label asp-for="Marca" class="control-label"></label>
+                <input asp-for="Marca" class="form-control" />
+                <span asp-validation-for="Marca" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Cantidad" class="control-label"></label>
+                <input asp-for="Cantidad" class="form-control" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group ">
+                    <label asp-for="ModeloSerie" class="control-label"></label>
+                    <input asp-for="ModeloSerie" class="form-control" />
+                    <span asp-validation-for="ModeloSerie" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-4">
+                <div class="form-group ">
+                    <label asp-for="PrecioUnitario" class="control-label"></label>
+                    <input asp-for="PrecioUnitario" class="form-control" />
+                    <span asp-validation-for="PrecioUnitario" class="text-danger"></span>
+                </div>
+            </div>
+
+            @* RELACIONES BOTONES DESPLEGABLAS*@
+
+            <div class="col-md-4">
+                <div class="form-group ">
+                    <label asp-for="Proveedor" class="control-label"></label>
+
+                    <select asp-for="IdProveedor" class="form-control">
+                        <option selected value="">SELECCIONAR</option>
+                        @foreach (var item in proveedores)
+                        {
+                            <option value="@item.IdProveedor">@item.Nombre</option>
+                        }
+                    </select>
+                    <span asp-validation-for="IdProveedor" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group ">
+                    <label asp-for="Categoria" class="control-label"></label>
+
+                    <select asp-for="IdCategoria" class="form-control">
+                        <option selected value="">SELECCIONAR</option>
+                        @foreach (var item in categorias)
+                        {
+                            <option value="@item.IdCategoria">@item.Nombre</option>
+                        }
+                    </select>
+                    <span asp-validation-for="IdCategoria" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        @*BOTONES EDITADOS CON ICONOS*@
+
+        <div class="form-group" style="margin-top: 10px;">
+            <button type="submit" class="btn btn-success" style="margin-right: 10px;">
+                <i class="fas fa-save"></i> Guardar
+            </button>
+
+            <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
+                <i class="fas fa-times"></i> Cancelar
+            </button>
+        </div>
+
+        <span class="text-danger">@ViewBag.Error</span>
+
+    </div>
+
+</form>
+
+@section Scripts
+    {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

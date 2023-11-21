@@ -53,7 +53,7 @@ namespace SysComercialMartinez.EntidadesDeNegocio
         [ForeignKey("Categoria")]
         [Required(ErrorMessage = "Categoria es obligatorio")]
         [Display(Name = "Proveedor")]
-        public int IdCantegoria { get; set; }
+        public int IdCategoria { get; set; }
 
         public Categoria Categoria { get; set; }
 
