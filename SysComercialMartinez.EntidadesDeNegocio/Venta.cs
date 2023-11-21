@@ -42,7 +42,7 @@ namespace SysComercialMartinez.EntidadesDeNegocio
         public string? DUI { get; set; }
 
         [Required(ErrorMessage = "FormaDePago es obligatorio")]
-        public byte? FormaDePago { get; set; }
+        public byte? FormaPago { get; set; }
         [Display(Name = "Total")]
         [Required(ErrorMessage = "El campo Total es obligatorio.")]
         public decimal? Total { get; set; }

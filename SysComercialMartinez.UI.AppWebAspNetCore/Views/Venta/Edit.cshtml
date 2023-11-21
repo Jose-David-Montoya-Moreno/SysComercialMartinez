@@ -1,0 +1,143 @@
+﻿@model SysComercialMartinez.EntidadesDeNegocio.Venta
+
+@{
+    ViewData["Title"] = "Edit";
+    List<SysComercialMartinez.EntidadesDeNegocio.Usuario> usuarios = ViewBag.Usuarios as List<SysComercialMartinez.EntidadesDeNegocio.Usuario>;
+}
+
+<h1>Editar</h1>
+
+<h4>Venta</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdVenta" class="form-control" />
+
+            <div class="form-group">
+                <label asp-for="NumeroVenta" class="control-label"></label>
+                <input asp-for="NumeroVenta" class="form-control" />
+                <span asp-validation-for="NumeroVenta" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NombreCliente" class="control-label"></label>
+                <input asp-for="NombreCliente" class="form-control" />
+                <span asp-validation-for="NombreCliente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Direccion" class="control-label"></label>
+                <input asp-for="Direccion" class="form-control" />
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label"></label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Correo" class="control-label"></label>
+                <input asp-for="Correo" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DUI" class="control-label"></label>
+                <input asp-for="DUI" class="form-control" />
+                <span asp-validation-for="DUI" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="FormaPago" class="control-label"></label>
+                    <select asp-for="FormaPago" class="form-control">
+                        <option selected value="">SELECCIONAR</option>
+                        @if (Model.FormaPago == 1)
+                        {
+                            <option selected value="1">EFECTIVO</option>
+                        }
+                        else
+                        {
+                            <option value="1">EFECTIVO</option>
+                        }
+                        @if (Model.FormaPago == 2)
+                        {
+                            <option selected value="2">TARJETA</option>
+                        }
+                        else
+                        {
+                            <option value="2">TARJETA</option>
+                        }
+
+                    </select>
+                    <span asp-validation-for="FormaPago" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Total" class="control-label"></label>
+                <input asp-for="Total" class="form-control" />
+                <span asp-validation-for="Total" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descuento" class="control-label"></label>
+                <input asp-for="Descuento" class="form-control" />
+                <span asp-validation-for="Descuento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Impuesto" class="control-label"></label>
+                <input asp-for="Impuesto" class="form-control" />
+                <span asp-validation-for="Impuesto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalPagado" class="control-label"></label>
+                <input asp-for="TotalPagado" class="form-control" />
+                <span asp-validation-for="TotalPagado" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdUsuario" class="control-label"></label>
+                        <select asp-for="IdUsuario" class="form-control">
+                            <option selected value="">SELECCIONAR</option>
+                            @foreach (var item in usuarios)
+                            {
+                                if (Model.IdUsuario == item.Id)
+                                {
+                                    <option selected value="@item.Id">@item.Nombre</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Id">@item.Nombre</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="IdUsuario" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            @*BOTONES EDITADOS CON ICONOS*@
+
+            <div class="form-group" style="margin-top: 10px;">
+                <button type="submit" class="btn btn-success" style="margin-right: 10px;">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+
+                <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(function () {
+            $("form input[name]").trigger("blur");
+        });
+    </script>
+}
