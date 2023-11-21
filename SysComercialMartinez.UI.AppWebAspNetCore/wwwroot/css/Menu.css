@@ -16,7 +16,7 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #102c54;
+    background-color: #ff6a00;
     padding: 0px;
     overflow: auto;
     align-items: center;
@@ -52,7 +52,7 @@ header {
     position: fixed;
     top: 0;
     left: -250px;
-    background: linear-gradient(to right, #102c54, #222); /* Color de fondo del menú */
+    background: linear-gradient( #ff6a00, #000000); /* Color de fondo del menú */
     color: white; /* Color del texto en el menú */
     transition: width 0.3s; /* Transición suave para cambiar el ancho del menú */
     overflow-y: auto; /* Agrega una barra de desplazamiento vertical si el contenido es largo */

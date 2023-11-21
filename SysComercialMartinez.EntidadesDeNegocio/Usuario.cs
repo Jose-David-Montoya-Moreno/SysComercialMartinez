@@ -36,7 +36,7 @@ namespace SysComercialMartinez.EntidadesDeNegocio
         [Display(Name = "Fecha registro")]
         public DateTime FechaRegistro { get; set; }
         public ICollection<Venta>? Venta { get; set; }
-        public ICollection<Compra>? Pedido { get; set; }
+        public ICollection<Compra>? Compra { get; set; }
         public Rol Rol { get; set; }
         [NotMapped]
         public int Top_Aux { get; set; }

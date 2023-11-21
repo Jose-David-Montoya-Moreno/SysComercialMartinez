@@ -29,6 +29,13 @@ namespace SysComercialMartinez.EntidadesDeNegocio
         [Required(ErrorMessage = "Total es obligatorio")]
         public decimal Total { get; set; }
 
+        [ForeignKey("Usuario")]
+        [Required(ErrorMessage = "Usuario es obligatorio")]
+        [Display(Name = "Usuario")]
+        public int IdUsuario { get; set; }
+
+        public Usuario Usuario { get; set; }
+
         [NotMapped]
         public int Top_Aux { get; set; }
     }
