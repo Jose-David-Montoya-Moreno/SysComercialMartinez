@@ -23,7 +23,7 @@ namespace SysComercialMartinez.EntidadesDeNegocio
         [ForeignKey("Compra")]
         [Required(ErrorMessage = "Compra es obligatorio")]
         [Display(Name = "Compra")]
-        public int ICompra { get; set; }
+        public int IdCompra { get; set; }
 
         [ForeignKey("Producto")]
         [Required(ErrorMessage = "Producto es obligatorio")]
