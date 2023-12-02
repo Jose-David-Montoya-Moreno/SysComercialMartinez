@@ -1,0 +1,97 @@
+﻿@model SysComercialMartinez.EntidadesDeNegocio.DetalleVenta
+
+@{
+    ViewData["Title"] = "Edit";
+    List<SysComercialMartinez.EntidadesDeNegocio.Venta> ventas = ViewBag.Venta as List<SysComercialMartinez.EntidadesDeNegocio.Venta>;
+    List<SysComercialMartinez.EntidadesDeNegocio.Producto> productos = ViewBag.Producto as List<SysComercialMartinez.EntidadesDeNegocio.Producto>;
+}
+
+<h1>Modificar</h1>
+
+<h4>Detalle Ventas</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdDetalleVenta" class="form-control" />
+            <div class="form-group">
+                <label asp-for="Cantidad" class="control-label"></label>
+                <input asp-for="Cantidad" class="form-control" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValorTotal" class="control-label"></label>
+                <input asp-for="ValorTotal" class="form-control" />
+                <span asp-validation-for="ValorTotal" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdProducto" class="control-label"></label>
+                        <select asp-for="IdProducto" class="form-control">
+                            <option selected value="">SELECCIONAR</option>
+                            @foreach (var item in productos)
+                            {
+                                if (Model.IdProducto == item.IdProducto)
+                                {
+                                    <option selected value="@item.IdProducto">@item.Nombre</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.IdProducto">@item.Nombre</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="IdProducto" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdVenta" class="control-label"></label>
+                        <select asp-for="IdVenta" class="form-control">
+                            <option selected value="">SELECCIONAR</option>
+                            @foreach (var item in ventas)
+                            {
+                                if (Model.IdVenta == item.IdVenta)
+                                {
+                                    <option selected value="@item.IdVenta">@item.NumeroVenta</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.IdVenta">@item.NumeroVenta</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="IdVenta" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+
+            @*BOTONES EDITADOS CON ICONOS*@
+
+            <div class="form-group" style="margin-top: 10px;">
+                <button type="submit" class="btn btn-success" style="margin-right: 10px;">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+
+                <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
