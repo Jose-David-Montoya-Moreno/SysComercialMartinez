@@ -164,7 +164,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
                     var claims = new[] { new Claim(ClaimTypes.Name, usuario.Login), new Claim(ClaimTypes.Role, usuario.Rol.Nombre), new Claim(ClaimTypes.UserData, usuario.Login) };
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
-                    //global.idu = usuario.Id;
+                    global.idu = usuario.Id;
                 }
                 else
                     throw new Exception("Credenciales incorrectas");
