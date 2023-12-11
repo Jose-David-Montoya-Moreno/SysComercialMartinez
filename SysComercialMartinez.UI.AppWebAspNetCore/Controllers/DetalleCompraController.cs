@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SysComercialMartinez.EntidadesDeNegocio;
 using SysComercialMartinez.LogicaDeNegocio;
-
+using SysComercialMartinez.UI.AppWebAspNetCore.Models;
 
 namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 {
@@ -17,6 +17,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
         DetalleCompraBL DetalleCompraBL = new DetalleCompraBL();
         ProductoBL ProductoBL = new ProductoBL();
         CompraBL CompraBL = new CompraBL();
+        public static int idComp;
         // GET: DetallePedidoController
         public async Task<IActionResult> Index(DetalleCompra pDetalleCompra = null)
         {
@@ -172,19 +173,12 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             objCompra.IdUsuario = global.idu;
             objCompra.NumeroCompra = random.Next(100000, 999999);
             objCompra.Total = total;
+            objCompra.FormaPago = FormadaDePago;
             objCompra.TotalPago = totalpagado;
-            
 
-            //FacturaBL.CrearAsync(objFactura);
             await CompraBL.CrearAsync(objCompra);
 
-
-            DetalleFactura DetalleFacturas = new();
-            DetalleFacturas.Codigo = random.Next(100000, 999999);
-            DetalleFacturas.FechaEmision = DateTime.Now;
-            DetalleFacturas.FormaDePago = 1;
-
-            foreach (var detalle in detalleFacturas)
+            foreach (var detalle in detalleCompras)
             {
                 Producto objProducto = new Producto();
                 objProducto.IdProducto = detalle.IdProducto;
@@ -195,18 +189,14 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
                 await ProductoBL.ModificarAsync(objProducto);
 
 
-                idFac = objFactura.IdFactura;
-                detalle.IdFactura = objFactura.IdFactura;
-                await detalle_facturaBL.CrearAsync(detalle);
+                idComp = objCompra.IdCompra;
+                detalle.IdCompra = objCompra.IdCompra;
+                await DetalleCompraBL.CrearAsync(detalle);
             }
 
-            var venta = new Venta
-            {
-                ObjFactura = objFactura,
-                DetalleFacturas = detalleFacturas
-            };
+       
 
-            return RedirectToAction("ObtenerFactura");
+            return View("Venta");
         }
     }
 
