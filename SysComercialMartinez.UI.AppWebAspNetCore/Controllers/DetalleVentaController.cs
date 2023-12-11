@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using SysComercialMartinez.EntidadesDeNegocio;
 using SysComercialMartinez.LogicaDeNegocio;
+using SysComercialMartinez.UI.AppWebAspNetCore.Models;
 
 namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 {
@@ -14,6 +16,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
         DetalleVentaBL DetalleVentaBL = new DetalleVentaBL();
         ProductoBL ProductoBL = new ProductoBL();
         VentaBL VentaBL = new VentaBL();
+        public static int idVen;
         // GET: DetallePedidoController
         public async Task<IActionResult> Index(DetalleVenta pDetalleVenta = null)
         {
@@ -138,5 +141,93 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
                 return View(DetalleVenta);
             }
         }
+
+        [HttpPost("ProcesarFactura")]
+        public async Task<IActionResult> ProcesarFactura( string NombreCliente, string DUI,string Descripcion, string Direccion, string Correo, string Telefono, decimal total, decimal descuento, decimal impuesto, decimal totalpagado, int cantidad, int codigo, byte FormadaDePago, DateTime FechaEmision, decimal ValorTotal, List<DetalleVenta> detalleVentas)
+        {
+            Random random = new Random();
+
+            Venta objVenta = new();
+            objVenta.IdUsuario = global.idu;
+            objVenta.NumeroVenta = random.Next(100000, 999999);
+            objVenta.NombreCliente = NombreCliente ?? "N/A";
+            objVenta.Direccion = Direccion ?? "N/A";
+            objVenta.Correo = Correo ?? "N/A";
+            objVenta.DUI = DUI ?? "N/A";
+            objVenta.Total = total;
+            objVenta.Descuento = descuento;
+            objVenta.Impuesto = impuesto;
+            objVenta.TotalPagado = totalpagado;
+            objVenta.Telefono = Telefono ?? "N/A";
+            objVenta.FechaVenta = DateTime.Now;
+
+            //FacturaBL.CrearAsync(objFactura);
+            await VentaBL.CrearAsync(objVenta);
+
+
+          
+
+            foreach (var detalle in detalleVentas)
+            {
+                Producto objProducto = new Producto();
+                objProducto.IdProducto = detalle.IdProducto;
+                objProducto = await ProductoBL.ObtenerPorIdProductoAsync(objProducto);
+
+
+                objProducto.Cantidad = objProducto.Cantidad - detalle.Cantidad;
+                await ProductoBL.ModificarAsync(objProducto);
+
+
+                idVen = objVenta.IdVenta;
+                detalle.IdVenta = objVenta.IdVenta;
+                await DetalleVentaBL.CrearAsync(detalle);
+            }
+
+            var venta = new Ventas
+            {
+                ObjVenta = objVenta,
+                DetalleVentas = detalleVentas
+            };
+
+            return RedirectToAction("ObtenerFactura");
+        }
+
+        [HttpGet("ObtenerFactura")]
+
+        public async Task<IActionResult> ObtenerFactura()
+        {
+
+            DetalleVenta objdetalle = new DetalleVenta();
+            objdetalle.IdVenta = idVen;
+            List<DetalleVenta> ListaDetalle = await DetalleVentaBL.BuscarIncluirVentaProductoAsync(objdetalle);
+            ViewBag.Ventas = ListaDetalle.FirstOrDefault().Venta;
+            ViewBag.ListaDetalle = ListaDetalle;
+            return View();
+        }
+
+        public async Task<IActionResult> Reportes(DetalleVenta pDetalleFactura, DateTime fInicio, DateTime fFinal, int NumeroVenta)
+        {
+            List<Venta> ventas = await VentaBL.ObtenerTodosAsync();
+            List<DetalleVenta> detalleVentas = await DetalleVentaBL.ObtenerTodosAsync();
+
+            if (NumeroVenta != 0)
+            {
+                ViewBag.Ventas = ventas.Where(r => r.NumeroVenta == NumeroVenta).ToList();
+            }
+            else if (fInicio.Year != 1 && fFinal.Year != 1)
+            {
+                ViewBag.Ventas = ventas.Where(r => r.FechaVenta.Date >= fInicio.Date && r.FechaVenta.Date <= fFinal.Date).ToList();
+            }
+            else
+            {
+                ViewBag.Ventas = ventas;
+            }
+
+            ViewBag.Detalles = detalleVentas;
+
+            return View();
+        }
+
     }
+
 }
