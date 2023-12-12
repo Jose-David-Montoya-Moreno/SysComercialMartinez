@@ -179,7 +179,7 @@
                                     @Html.DisplayFor(modelItem => item.Producto.PrecioUnitario)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ValorTotal)
+                                   $ @Html.DisplayFor(modelItem => item.ValorTotal)
                                 </td>
 
                                 <td class="botonestabla">
@@ -420,11 +420,11 @@
                 const row = document.createElement("tr");
                 row.innerHTML = `
                             <td><input name='detalleVentas[${indeceFila}].IdProducto' value='${detalle.productoid}'  readonly="readonly" class="PrimeraColumna"/></td>
-                             <td><input name='detalleVentas[${indeceFila}].Cantidad' value='${detalle.cantidad}'  readonly="readonly" class="SiguientesColumnas" /></td>
-                                 <td><input name='detalleVentas[${indeceFila}].Nombre' value='${detalle.nombre}'  readonly="readonly" class="SiguientesColumnas"/></td>
-                                 <td><input name='detalleVentas[${indeceFila}].NombreCliente' value='${detalle.nombrecliente}'  readonly="readonly" class="SiguientesColumnas" /></td>
-                                <td><input name='detalleVentas[${indeceFila}].Precio' value='${detalle.precio}'  readonly="readonly" class="SiguientesColumnas"/></td>
-                                 <td><input name='detalleVentas[${indeceFila}].ValorTotal' value='${detalle.importeTotal}'  readonly="readonly" class="SiguientesColumnas" /></td>
+                            <td><input name='detalleVentas[${indeceFila}].Cantidad' value='${detalle.cantidad}'  readonly="readonly" class="SiguientesColumnas" /></td>
+                            <td><input name='detalleVentas[${indeceFila}].Nombre' value='${detalle.nombre}'  readonly="readonly" class="SiguientesColumnas"/></td>
+                            <td><input name='detalleVentas[${indeceFila}].Descripcion' value='${detalle.descripcion}'  readonly="readonly" class="SiguientesColumnas" /></td>
+                            <td><input name='detalleVentas[${indeceFila}].Precio' value='${ detalle.precio}'  readonly="readonly" class="SiguientesColumnas"/></td>
+                            <td><input name='detalleVentas[${indeceFila}].ValorTotal' value='${detalle.importeTotal}'  readonly="readonly" class="SiguientesColumnas" /></td>
                             <td>
                                 <button class="eliminar-producto btn btn-danger" data-index="${index}">
                                     <i class="fas fa-trash"></i>
