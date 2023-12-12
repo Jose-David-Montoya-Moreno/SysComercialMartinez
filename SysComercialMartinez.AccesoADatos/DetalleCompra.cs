@@ -16,6 +16,7 @@ namespace SysComercialMartinez.AccesoADatos
             int result = 0;
             using (var bdContexto = new BDContexto())
             {
+                
                 bdContexto.Add(pDetalleCompra);
                 result = await bdContexto.SaveChangesAsync();
             }
@@ -61,7 +62,7 @@ namespace SysComercialMartinez.AccesoADatos
             var DetalleCompra = new List<DetalleCompra>();
             using (var bdContexto = new BDContexto())
             {
-                DetalleCompra = await bdContexto.DetalleCompra.ToListAsync();
+                DetalleCompra = await bdContexto.DetalleCompra.Include(p => p.Producto).ToListAsync();
             }
             return DetalleCompra;
         }
@@ -71,29 +72,40 @@ namespace SysComercialMartinez.AccesoADatos
                 pQuery = pQuery.Where(s => s.IdDetalleCompra == pDetalleCompra.IdDetalleCompra);
             if (pDetalleCompra.IdCompra > 0)
                 pQuery = pQuery.Where(s => s.IdCompra == pDetalleCompra.IdCompra);
-            if (pDetalleCompra.IdCompra > 0)
+            if (pDetalleCompra.IdProducto > 0)
                 pQuery = pQuery.Where(s => s.IdProducto == pDetalleCompra.IdProducto);
-            if (pDetalleCompra.Cantidad > 0)
-                pQuery = pQuery.Where(s => s.Cantidad == pDetalleCompra.Cantidad);
-            if (pDetalleCompra.Cantidad > 0)
-                pQuery = pQuery.Where(s => s.ValorTotal == pDetalleCompra.ValorTotal);
+            //if (pDetalleFactura.Codigo > 0)
+            //    pQuery = pQuery.Where(s => s.Codigo == pDetalleFactura.Codigo);
+            //if (pDetalleFactura.Cantidad > 0)
+            //    pQuery = pQuery.Where(s => s.Cantidad == pDetalleFactura.Cantidad);          
+            //if (!string.IsNullOrWhiteSpace(pDetalleFactura.FormaDePago))
+            //    pQuery = pQuery.Where(s => s.FormaDePago.Contains(pDetalleFactura.FormaDePago));
 
+            
+            //if (!string.IsNullOrWhiteSpace(pDetalleFactura.FechaEmision.ToString()))
+            //    pQuery = pQuery.Where(s => s.FechaEmision.ToString().Contains(pDetalleFactura.FechaEmision.ToString()));
+            //if (pDetalleFactura.ValorTotal > 0)
+            //    pQuery = pQuery.Where(s => s.ValorTotal == pDetalleFactura.ValorTotal);
+
+
+
+            pQuery = pQuery.OrderByDescending(s => s.IdDetalleCompra).AsQueryable();
             if (pDetalleCompra.Top_Aux > 0)
                 pQuery = pQuery.Take(pDetalleCompra.Top_Aux).AsQueryable();
             return pQuery;
         }
+
         public static async Task<List<DetalleCompra>> BuscarAsync(DetalleCompra pDetalleCompra)
         {
-            var DetalleCompra = new List<DetalleCompra>();
+            var DetalleCompras = new List<DetalleCompra>();
             using (var bdContexto = new BDContexto())
             {
                 var select = bdContexto.DetalleCompra.AsQueryable();
                 select = QuerySelect(select, pDetalleCompra);
-                DetalleCompra = await select.ToListAsync();
+                DetalleCompras = await select.ToListAsync();
             }
-            return DetalleCompra;
+            return DetalleCompras;
         }
-
         public static async Task<List<DetalleCompra>> BuscarIncluirCompraProductoAsync(DetalleCompra pDetalleCompra)
         {
             var DetalleCompra = new List<DetalleCompra>();

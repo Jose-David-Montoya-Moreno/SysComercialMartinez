@@ -165,7 +165,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
         }
 
         [HttpPost("ProcesarCompra")]
-        public async Task<IActionResult> ProcesarCompra( decimal total, decimal totalpagado,byte FormadaDePago, List<DetalleCompra> detalleCompras)
+        public async Task<IActionResult> ProcesarCompra( decimal total, decimal totalpagado,byte FormaPago, DateTime FechaCompra, List<DetalleCompra> detalleCompras)
         {
             Random random = new Random();
 
@@ -173,8 +173,9 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             objCompra.IdUsuario = global.idu;
             objCompra.NumeroCompra = random.Next(100000, 999999);
             objCompra.Total = total;
-            objCompra.FormaPago = FormadaDePago;
+            objCompra.FormaPago = 1;
             objCompra.TotalPago = totalpagado;
+            objCompra.FechaCompra = DateTime.Now;
 
             await CompraBL.CrearAsync(objCompra);
 
@@ -196,12 +197,12 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 
 
 
-            return RedirectToAction("ObtenerFactura");
+            return RedirectToAction("ObtenerCompra");
         }
 
-        [HttpGet("ObtenerFactura")]
+        [HttpGet("ObtenerCompra")]
 
-        public async Task<IActionResult> ObtenerFactura()
+        public async Task<IActionResult> ObtenerCompra()
         {
 
             DetalleCompra objdetalle = new DetalleCompra();
