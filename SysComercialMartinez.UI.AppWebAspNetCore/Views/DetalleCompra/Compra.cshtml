@@ -305,6 +305,7 @@
         agregarProductoButtons.forEach(function (button) {
             button.addEventListener("click", function () {
                 const productoid = button.getAttribute("data-productoid");
+                const codigo = button.getAttribute("data-codigo");
                 const nombre = button.getAttribute("data-nombre");
                 const descripcion = button.getAttribute("data-descripcion");
                 const stock = parseFloat(button.getAttribute("data-stock"));
@@ -336,6 +337,21 @@
             calculateTotal();
         }
 
+        function agregarProducto(productoid, codigo, nombre, descripcion, cantidad, precio) {
+            const importeTotal = parseFloat(cantidad) * precio;
+            detalleCompras.push({
+                productoid: productoid,
+                codigo: codigo,
+                nombre: nombre,
+                descripcion: descripcion,
+                cantidad: parseFloat(cantidad),
+                precio: precio,
+                importeTotal: importeTotal,
+            });
+            updateDetalleCompraTable();
+            calculateTotal();
+        }
+
         eliminarProductoButtons.forEach(function (button) {
             button.addEventListener("click", function () {
                 const id = parseInt(button.getAttribute("data-id"));
@@ -347,7 +363,7 @@
                 }
             });
         });
-
+        // Modificar la función updateDetalleFacturaTable para agregar un botón de eliminar
         function updateDetalleCompraTable() {
             let indeceFila = -1;
             const tbody = document.querySelector("#tablaDetalleCompra tbody");
@@ -359,13 +375,13 @@
                 indeceFila++;
                 const row = document.createElement("tr");
                 row.innerHTML = `
-                                     <td><input name='detalleCompras[${indeceFila}].IdProducto' value='${detalle.productoid}'  readonly="readonly" class="PrimeraColumna"/></td>
+                                <td><input name='detalleCompras[${indeceFila}].IdProducto' value='${detalle.productoid}'  readonly="readonly" class="PrimeraColumna"/></td>
                                      <td><input name='detalleCompras[${indeceFila}].Cantidad' value='${detalle.cantidad}'  readonly="readonly" class="SiguientesColumnas" /></td>
                                      <td><input name='detalleCompras[${indeceFila}].Nombre' value='${detalle.nombre}'  readonly="readonly" class="SiguientesColumnas"/></td>
                                      <td><input name='detalleCompras[${indeceFila}].Descripcion' value='${detalle.descripcion}'  readonly="readonly" class="SiguientesColumnas" /></td>
-                                     <td><input name='detalleCompras[${indeceFila}].Precio' value='${detalle.precio}'  readonly="readonly" class="SiguientesColumnas"/></td>
+                                    <td><input name='detalleCompras[${indeceFila}].Precio' value='${detalle.precio}'  readonly="readonly" class="SiguientesColumnas"/></td>
                                      <td><input name='detalleCompras[${indeceFila}].ValorTotal' value='${detalle.importeTotal}'  readonly="readonly" class="SiguientesColumnas" /></td>
-                                    <td>
+                                <td>
                                     <button class="eliminar-producto btn btn-danger" data-index="${index}">
                                         <i class="fas fa-trash"></i>
                                     </button>
@@ -388,7 +404,7 @@
         function removeProduct(index) {
             if (index >= 0 && index < detalleCompras.length) {
                 detalleCompras.splice(index, 1);
-                updateDetalleComprasTable();
+                updateDetalleCompraTable();
                 calculateTotal();
             }
         }

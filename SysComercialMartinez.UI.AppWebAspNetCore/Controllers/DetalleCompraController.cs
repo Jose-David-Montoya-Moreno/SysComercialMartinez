@@ -185,7 +185,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
                 objProducto = await ProductoBL.ObtenerPorIdProductoAsync(objProducto);
 
 
-                objProducto.Cantidad = objProducto.Cantidad - detalle.Cantidad;
+                objProducto.Cantidad = objProducto.Cantidad + detalle.Cantidad;
                 await ProductoBL.ModificarAsync(objProducto);
 
 
@@ -194,9 +194,22 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
                 await DetalleCompraBL.CrearAsync(detalle);
             }
 
-       
 
-            return View("Venta");
+
+            return RedirectToAction("ObtenerFactura");
+        }
+
+        [HttpGet("ObtenerFactura")]
+
+        public async Task<IActionResult> ObtenerFactura()
+        {
+
+            DetalleCompra objdetalle = new DetalleCompra();
+            objdetalle.IdCompra = idComp;
+            List<DetalleCompra> ListaDetalle = await DetalleCompraBL.BuscarIncluirCompraProductoAsync(objdetalle);
+            ViewBag.Compras = ListaDetalle.FirstOrDefault().Compra;
+            ViewBag.ListaDetalle = ListaDetalle;
+            return View();
         }
     }
 
