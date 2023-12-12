@@ -1,8 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Index";
-    SysComercialMartinez.EntidadesDeNegocio.Venta ventas = ViewBag.Ventas as SysComercialMartinez.EntidadesDeNegocio.Venta;
+    SysComercialMartinez.EntidadesDeNegocio.Venta venta = ViewBag.Ventas as SysComercialMartinez.EntidadesDeNegocio.Venta;
     List<SysComercialMartinez.EntidadesDeNegocio.Producto> productos = ViewBag.Producto as List<SysComercialMartinez.EntidadesDeNegocio.Producto>;
-    List<SysComercialMartinez.EntidadesDeNegocio.DetalleVenta> ListaDetalle = ViewBag.ListaDetalle as List<SysComercialMartinez.EntidadesDeNegocio.DetalleVenta>;
+    List<SysComercialMartinez.EntidadesDeNegocio.DetalleVenta> ListaDetalles = ViewBag.ListaDetalles as List<SysComercialMartinez.EntidadesDeNegocio.DetalleVenta>;
 }
 <div class="row">
     <div id="miDiv" style=" text-align: justify;">
@@ -17,16 +17,16 @@
             <hr />
 
             <p class="ticket-info">
-                Fecha:@ventas.FechaVenta<br>
-                N.Factura: @ventas.NumeroVenta<br>
+                Fecha:@venta.FechaVenta<br>
+                N.Factura: @venta.NumeroVenta<br>
             </p>
             <hr />
 
             <p class="ticket-info">
-                Cliente: @ventas.NombreCliente<br>
-                Direcion: @ventas.Direccion<br>
-                Correo: @ventas.Correo<br>
-                Telefono: @ventas.Telefono<br>
+                Cliente: @venta.NombreCliente<br>
+                Direcion: @venta.Direccion<br>
+                Correo: @venta.Correo<br>
+                Telefono: @venta.Telefono<br>
             </p>
         </div>
 
@@ -55,7 +55,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in ListaDetalle)
+                    @foreach (var item in ListaDetalles)
                     {
                         <tr>
 
@@ -84,7 +84,7 @@
                         <td colspan="3"></td>
                         <td colspan="1">Total</td>
                         <td>
-                            <b>  $ @ventas.TotalPagado</b>
+                            <b>  $ @venta.TotalPagado</b>
                         </td>
                     </tr>
 

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
+
 using SysComercialMartinez.EntidadesDeNegocio;
 using SysComercialMartinez.LogicaDeNegocio;
 using SysComercialMartinez.UI.AppWebAspNetCore.Models;
@@ -175,26 +175,26 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 
 
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DetalleVenta(DetalleFactura pDetalleFactura)
-        //{
-        //    try
-        //    {
-        //        int result = await detalle_facturaBL.CrearAsync(pDetalleFactura);
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ViewBag.Error = ex.Message;
-        //        ViewBag.Facturas = await FacturaBL.ObtenerTodosAsync();
-        //        ViewBag.Producto = await ProductoBL.ObtenerTodosAsync();
-        //        return View(pDetalleFactura);
-        //    }
-        //}
-        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DetalleVenta(DetalleVenta pDetalleVenta)
+        {
+            try
+            {
+                int result = await DetalleVentaBL.CrearAsync(pDetalleVenta);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                ViewBag.Ventas = await VentaBL.ObtenerTodosAsync();
+                ViewBag.Producto = await ProductoBL.ObtenerTodosAsync();
+                return View(pDetalleVenta);
+            }
+        }
 
-       
+
+
         [HttpPost("ProcesarFactura")]
         public async Task<IActionResult> ProcesarFactura( string NombreCliente, string DUI, string Direccion, string Correo, string Telefono, decimal total, decimal descuento, decimal impuesto, decimal totalpagado, int cantidad, int codigo, byte FormaPago, DateTime FechaVenta, decimal ValorTotal, List<DetalleVenta> detalleVentas)
         {
@@ -253,9 +253,9 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 
             DetalleVenta objdetalle = new DetalleVenta();
             objdetalle.IdVenta = idVen;
-            List<DetalleVenta> ListaDetalle = await DetalleVentaBL.BuscarIncluirVentaProductoAsync(objdetalle);
-            ViewBag.Ventas = ListaDetalle.FirstOrDefault().Venta;
-            ViewBag.ListaDetalle = ListaDetalle;
+            List<DetalleVenta> ListaDetalles = await DetalleVentaBL.BuscarIncluirVentaProductoAsync(objdetalle);
+            ViewBag.Ventas = ListaDetalles.FirstOrDefault().Venta;
+            ViewBag.ListaDetalles = ListaDetalles;
             return View();
         }
 
