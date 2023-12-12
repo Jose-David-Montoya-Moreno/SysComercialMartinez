@@ -218,9 +218,6 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             //FacturaBL.CrearAsync(objFactura);
             await VentaBL.CrearAsync(objVenta);
 
-
-          
-
             foreach (var detalle in detalleVentas)
             {
                 Producto objProducto = new Producto();
@@ -253,9 +250,9 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 
             DetalleVenta objdetalle = new DetalleVenta();
             objdetalle.IdVenta = idVen;
-            List<DetalleVenta> ListaDetalles = await DetalleVentaBL.BuscarIncluirVentaProductoAsync(objdetalle);
-            ViewBag.Ventas = ListaDetalles.FirstOrDefault().Venta;
-            ViewBag.ListaDetalles = ListaDetalles;
+            List<DetalleVenta> ListaDetalle = await DetalleVentaBL.BuscarIncluirVentaProductoAsync(objdetalle);
+            ViewBag.Ventas = ListaDetalle.FirstOrDefault().Venta;
+            ViewBag.ListaDetalle = ListaDetalle;
             return View();
         }
 

@@ -69,7 +69,7 @@ namespace SysComercialMartinez.AccesoADatos
             var Ventas = new List<Venta>();
             using (var bdContexto = new BDContexto())
             {
-                Ventas = await bdContexto.Venta.ToListAsync();
+                Ventas = await bdContexto.Venta.Include(v => v.DetalleVenta).ThenInclude(p => p.Producto).ToListAsync();
             }
             return Ventas;
         }

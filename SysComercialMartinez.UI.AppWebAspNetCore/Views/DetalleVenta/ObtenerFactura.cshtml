@@ -2,7 +2,7 @@
     ViewData["Title"] = "Index";
     SysComercialMartinez.EntidadesDeNegocio.Venta venta = ViewBag.Ventas as SysComercialMartinez.EntidadesDeNegocio.Venta;
     List<SysComercialMartinez.EntidadesDeNegocio.Producto> productos = ViewBag.Producto as List<SysComercialMartinez.EntidadesDeNegocio.Producto>;
-    List<SysComercialMartinez.EntidadesDeNegocio.DetalleVenta> ListaDetalles = ViewBag.ListaDetalles as List<SysComercialMartinez.EntidadesDeNegocio.DetalleVenta>;
+    List<SysComercialMartinez.EntidadesDeNegocio.DetalleVenta> ListaDetalle = ViewBag.ListaDetalle as List<SysComercialMartinez.EntidadesDeNegocio.DetalleVenta>;
 }
 <div class="row">
     <div id="miDiv" style=" text-align: justify;">
@@ -55,7 +55,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in ListaDetalles)
+                    @foreach (var item in ListaDetalle)
                     {
                         <tr>
 
