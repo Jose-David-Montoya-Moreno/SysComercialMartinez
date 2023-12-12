@@ -1,0 +1,108 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    SysComercialMartinez.EntidadesDeNegocio.Venta ventas = ViewBag.Ventas as SysComercialMartinez.EntidadesDeNegocio.Venta;
+    List<SysComercialMartinez.EntidadesDeNegocio.Producto> productos = ViewBag.Producto as List<SysComercialMartinez.EntidadesDeNegocio.Producto>;
+    List<SysComercialMartinez.EntidadesDeNegocio.DetalleVenta> ListaDetalle = ViewBag.ListaDetalle as List<SysComercialMartinez.EntidadesDeNegocio.DetalleVenta>;
+}
+<div class="row">
+    <div id="miDiv" style=" text-align: justify;">
+        <div class="container">
+            <p class="ticket-header">Zero Stress</p>
+            <img src="~/IMG/ZeroStresLogo.png" class="ImagenTicket" />
+            <p class="ticket-info">
+                Dirección:Calle San Antonio del monte avenida monserrat<br>
+                Teléfono: +503 70989762 <br>
+                NIT: 123456789-0
+            </p>
+            <hr />
+
+            <p class="ticket-info">
+                Fecha:@ventas.FechaVenta<br>
+                N.Factura: @ventas.NumeroVenta<br>
+            </p>
+            <hr />
+
+            <p class="ticket-info">
+                Cliente: @ventas.NombreCliente<br>
+                Direcion: @ventas.Direccion<br>
+                Correo: @ventas.Correo<br>
+                Telefono: @ventas.Telefono<br>
+            </p>
+        </div>
+
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+
+
+                        <th>
+                            Producto
+                        </th>
+                        <th>
+                            Descripción
+                        </th>
+                        <th>
+                            Cantidad
+                        </th>
+                        <th>
+                            Precio
+                        </th>
+                        <th>
+                            ValorTotal
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ListaDetalle)
+                    {
+                        <tr>
+
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Producto.Descripcion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cantidad)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Producto.PrecioUnitario)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ValorTotal)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td colspan="1">Total</td>
+                        <td>
+                            <b>  $ @ventas.TotalPagado</b>
+                        </td>
+                    </tr>
+
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <button class="btn btn-primary" onclick="imprimirDiv()"><i class="fa-solid fa-print" style="color: #ffffff;"></i> Imprimir</button>
+    </div>
+</div>
+<script>
+    function imprimirDiv() {
+        var contenidoDiv = document.getElementById('miDiv').innerHTML;
+        var ventanaImpresion = window.open('', '', 'width=600,height=600');
+        ventanaImpresion.document.write('<style>@@page { margin: 0; }</style>');
+        ventanaImpresion.document.write(contenidoDiv);
+        ventanaImpresion.print();
+    }
+</script>

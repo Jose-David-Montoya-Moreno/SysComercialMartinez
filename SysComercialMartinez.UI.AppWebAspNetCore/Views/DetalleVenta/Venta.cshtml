@@ -140,7 +140,7 @@
 
 
 <hr class="Separation" />
-<form asp-controller="DetalleFactura" asp-action="ProcesarFactura" method="post">
+<form asp-controller="DetalleVenta" asp-action="ProcesarFactura" method="post">
     <div class="row mt-3">
         <div class="col-sm-11">
             <div class="table-responsive-sm">
@@ -224,6 +224,12 @@
 
                     <div class="col-md-3">
                         <div class="form-group">
+                            <label class="control-label">DUI</label>
+                            <input type="text" id="DUI" class="form-control" name="DUI" placeholder="Ingrese su correo" />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
                             <label class="control-label">Nombre</label>
                             <input type="text" id="NombreCliente" class="form-control" name="NombreCliente" placeholder="Ingrese su nombre" />
                         </div>
@@ -287,7 +293,7 @@
                     <div class="col-sm-4">
                         <div class="input-group input-group-sm mb-2">
                             <label class="DataCustomerFormaP" for="inputGroupSelect01">F. Pago</label>
-                            <select name="FormaDePago" class="form-control">
+                            <select name="FormaPago" class="form-control">
                                 <option selected value="1">EFECTIVO</option>
                                 <option value="2">TARJETA</option>
                             </select>
