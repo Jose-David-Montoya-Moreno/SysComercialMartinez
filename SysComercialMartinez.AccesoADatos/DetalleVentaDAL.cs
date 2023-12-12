@@ -61,49 +61,48 @@ namespace SysComercialMartinez.AccesoADatos
             var DetalleVenta = new List<DetalleVenta>();
             using (var bdContexto = new BDContexto())
             {
-                DetalleVenta = await bdContexto.DetalleVenta.ToListAsync();
+                DetalleVenta = await bdContexto.DetalleVenta.Include(p => p.Producto).ToListAsync();
             }
             return DetalleVenta;
         }
         internal static IQueryable<DetalleVenta> QuerySelect(IQueryable<DetalleVenta> pQuery, DetalleVenta pDetalleVenta)
         {
-            if (pDetalleVenta.IdDetalleVenta> 0)
+            if (pDetalleVenta.IdDetalleVenta > 0)
                 pQuery = pQuery.Where(s => s.IdDetalleVenta == pDetalleVenta.IdDetalleVenta);
             if (pDetalleVenta.IdVenta > 0)
                 pQuery = pQuery.Where(s => s.IdVenta == pDetalleVenta.IdVenta);
-            if (pDetalleVenta.IdVenta > 0)
+            if (pDetalleVenta.IdProducto > 0)
                 pQuery = pQuery.Where(s => s.IdProducto == pDetalleVenta.IdProducto);
-            if (pDetalleVenta.Cantidad > 0)
-                pQuery = pQuery.Where(s => s.Cantidad == pDetalleVenta.Cantidad);
-            if (pDetalleVenta.Cantidad > 0)
-                pQuery = pQuery.Where(s => s.ValorTotal == pDetalleVenta.ValorTotal);
 
+          
+
+            pQuery = pQuery.OrderByDescending(s => s.IdDetalleVenta).AsQueryable();
             if (pDetalleVenta.Top_Aux > 0)
                 pQuery = pQuery.Take(pDetalleVenta.Top_Aux).AsQueryable();
             return pQuery;
         }
         public static async Task<List<DetalleVenta>> BuscarAsync(DetalleVenta pDetalleVenta)
         {
-            var DetalleVenta = new List<DetalleVenta>();
+            var DetalleVentas = new List<DetalleVenta>();
             using (var bdContexto = new BDContexto())
             {
                 var select = bdContexto.DetalleVenta.AsQueryable();
                 select = QuerySelect(select, pDetalleVenta);
-                DetalleVenta = await select.ToListAsync();
+                DetalleVentas = await select.ToListAsync();
             }
-            return DetalleVenta;
+            return DetalleVentas;
         }
 
         public static async Task<List<DetalleVenta>> BuscarIncluirVentaProductoAsync(DetalleVenta pDetalleVenta)
         {
-            var DetalleVenta = new List<DetalleVenta>();
+            var DetalleVentas = new List<DetalleVenta>();
             using (var bdContexto = new BDContexto())
             {
                 var select = bdContexto.DetalleVenta.AsQueryable();
                 select = QuerySelect(select, pDetalleVenta).Include(s => s.Venta).Include(s => s.Producto).AsQueryable();
-                DetalleVenta = await select.ToListAsync();
+                DetalleVentas = await select.ToListAsync();
             }
-            return DetalleVenta;
+            return DetalleVentas;
         }
     }
 

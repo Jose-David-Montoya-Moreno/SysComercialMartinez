@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
+
 using SysComercialMartinez.EntidadesDeNegocio;
 using SysComercialMartinez.LogicaDeNegocio;
 using SysComercialMartinez.UI.AppWebAspNetCore.Models;
@@ -142,8 +142,61 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             }
         }
 
+
+        List<DetalleVenta>? DetalleVentas;
+        public async Task<IActionResult> Venta(int campo, DetalleVenta pDetalleVenta = null)
+        {
+            if (pDetalleVenta == null)
+                pDetalleVenta = new DetalleVenta();
+            if (pDetalleVenta.Top_Aux == 0)
+                pDetalleVenta.Top_Aux = 10;
+            else if (pDetalleVenta.Top_Aux == -1)
+                pDetalleVenta.Top_Aux = 0;
+            var taskBuscar = DetalleVentaBL.BuscarIncluirVentaProductoAsync(pDetalleVenta);
+            var taskObtenerTodosVentas = VentaBL.ObtenerTodosAsync();
+            var taskObtenerTodosProducto = ProductoBL.ObtenerTodosAsync();
+            DetalleVentas = await taskBuscar;
+            ViewBag.Top = pDetalleVenta.Top_Aux;
+            ViewBag.Ventas = await taskObtenerTodosVentas;
+
+            if (campo > 0)
+            {
+                Producto producto = new Producto();
+                producto.Codigo = campo;
+                List<Producto> ProductoBuscado = await ProductoBL.BuscarAsync(producto);
+                ViewBag.Producto = ProductoBuscado;
+            }
+            else
+            {
+                ViewBag.Producto = await taskObtenerTodosProducto;
+            }
+            return View(DetalleVentas);
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DetalleVenta(DetalleVenta pDetalleVenta)
+        {
+            try
+            {
+                int result = await DetalleVentaBL.CrearAsync(pDetalleVenta);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                ViewBag.Ventas = await VentaBL.ObtenerTodosAsync();
+                ViewBag.Producto = await ProductoBL.ObtenerTodosAsync();
+                return View(pDetalleVenta);
+            }
+        }
+
+
+
         [HttpPost("ProcesarFactura")]
-        public async Task<IActionResult> ProcesarFactura( string NombreCliente, string DUI,string Descripcion, string Direccion, string Correo, string Telefono, decimal total, decimal descuento, decimal impuesto, decimal totalpagado, int cantidad, int codigo, byte FormadaDePago, DateTime FechaEmision, decimal ValorTotal, List<DetalleVenta> detalleVentas)
+        public async Task<IActionResult> ProcesarFactura( string NombreCliente, string DUI, string Direccion, string Correo, string Telefono, decimal total, decimal descuento, decimal impuesto, decimal totalpagado, int cantidad, int codigo, byte FormaPago, DateTime FechaVenta, decimal ValorTotal, List<DetalleVenta> detalleVentas)
         {
             Random random = new Random();
 
@@ -159,13 +212,11 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             objVenta.Impuesto = impuesto;
             objVenta.TotalPagado = totalpagado;
             objVenta.Telefono = Telefono ?? "N/A";
+            objVenta.FormaPago = 1;
             objVenta.FechaVenta = DateTime.Now;
 
             //FacturaBL.CrearAsync(objFactura);
             await VentaBL.CrearAsync(objVenta);
-
-
-          
 
             foreach (var detalle in detalleVentas)
             {
