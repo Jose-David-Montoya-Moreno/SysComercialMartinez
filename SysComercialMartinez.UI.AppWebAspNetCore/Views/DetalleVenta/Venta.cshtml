@@ -346,25 +346,34 @@
 
         const detalleVentas = [];
 
-        agregarProductoButtons.forEach(function (button) {
-            button.addEventListener("click", function () {
-                const productoid = button.getAttribute("data-productoid");
-                const codigo = button.getAttribute("data-codigo");
-                const nombre = button.getAttribute("data-nombre");
-                const descripcion = button.getAttribute("data-descripcion");
-                const stock = parseFloat(button.getAttribute("data-stock"));
-                const precio = parseFloat(button.getAttribute("data-precio"));
+       agregarProductoButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+        const productoid = button.getAttribute("data-productoid");
+        const codigo = button.getAttribute("data-codigo");
+        const nombre = button.getAttribute("data-nombre");
+        const descripcion = button.getAttribute("data-descripcion");
+        const stock = parseFloat(button.getAttribute("data-stock"));
+        const precio = parseFloat(button.getAttribute("data-precio"));
 
                 const cantidad = prompt(`Ingrese la cantidad para "${nombre}"`);
-                if (cantidad !== null && !isNaN(cantidad)) {
-                    if (cantidad > 0 && cantidad <= stock) {
-                        agregarProducto(productoid, codigo, nombre, descripcion, cantidad, precio);
+                const descuento = prompt(`Ingrese el descuento para "${nombre}"`);
+
+                // Verifica si el campo de descuento está vacío y asigna 0 en ese caso
+                const descuentoValue = descuento !== null && descuento !== "" ? parseFloat(descuento) : 0;
+
+                if (cantidad !== null && !isNaN(cantidad) && !isNaN(descuentoValue)) {
+                    let cantidadValue = parseFloat(cantidad);
+
+                    if (cantidadValue > 0 && cantidadValue <= stock) {
+                        let precioConDescuento = precio - (precio * (descuentoValue / 100));
+                        agregarProducto(productoid, codigo, nombre, descripcion, cantidadValue, precioConDescuento);
                     } else {
                         alert("La cantidad deseada no se encuentra en stock");
                     }
                 }
-            });
-        });
+
+    });
+});
 
         function agregarProducto(productoid, codigo, nombre, descripcion, cantidad, precio) {
             const importeTotal = parseFloat(cantidad) * precio;

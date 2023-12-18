@@ -6,15 +6,18 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: linear-gradient( #ff6a00, #000000);
+    background-image: url('../IMG/FondoLogin.png'); /* Reemplaza 'ruta_de_tu_imagen.jpg' con la ruta de tu imagen */
+    background-size: cover; /* Para asegurarse de que la imagen cubra todo el fondo */
+    background-position: center; /* Para centrar la imagen en el fondo */
+    background-repeat: no-repeat; /* Para que la imagen no se repita */
 }
 
 .login-box {
     position: absolute;
     top: 50%;
     left: 50%;
-    height: 625px;
-    width: 450px;
+    height: 600px;
+    width: 425px;
     padding: 50px;
     transform: translate(-50%, -50%);
     background: rgba(0,0,0,.4);
