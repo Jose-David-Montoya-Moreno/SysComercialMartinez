@@ -14,9 +14,9 @@ namespace SysComercialMartinez.EntidadesDeNegocio
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdInventario { get; set; }
 
-        [Required(ErrorMessage = "Descripcion es obligatorio")]
+        [Required(ErrorMessage = "Detalles es obligatorio")]
         [StringLength(50, ErrorMessage = "Descripcion 50 caracteres")]
-        public string Descripcion { get; set;}
+        public string? Detalles { get; set;}
 
         [Required(ErrorMessage = "Cantidad es obligatorio")]
         public int Cantidad { get; set; }
@@ -30,10 +30,13 @@ namespace SysComercialMartinez.EntidadesDeNegocio
         [Required(ErrorMessage = "Producto es obligatorio")]
         [Display(Name = "Producto")]
         public int IdProducto { get; set; }
+        [NotMapped]
+        public int Top_Aux { get; set; }
 
         public Usuario? Usuario { get; set; }
 
 
         public Producto? Producto { get; set; }
+     
     }
 }
