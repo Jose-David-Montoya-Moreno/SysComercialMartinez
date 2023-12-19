@@ -77,57 +77,75 @@
                 <span asp-validation-for="Cantidad" class="text-danger"></span>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group ">
-                    <label asp-for="ModeloSerie" class="control-label"></label>
-                    <input asp-for="ModeloSerie" class="form-control" />
-                    <span asp-validation-for="ModeloSerie" class="text-danger"></span>
-                </div>
-            </div>
 
-
-
-            <div class="col-md-4">
-                <div class="form-group ">
-                    <label asp-for="PrecioUnitario" class="control-label"></label>
-                    <input asp-for="PrecioUnitario" class="form-control" />
-                    <span asp-validation-for="PrecioUnitario" class="text-danger"></span>
-                </div>
-            </div>
-
-            @* RELACIONES BOTONES DESPLEGABLAS*@
-
-            <div class="col-md-4">
-                <div class="form-group ">
-                    <label asp-for="Proveedor" class="control-label"></label>
-
-                    <select asp-for="IdProveedor" class="form-control">
-                        <option selected value="">SELECCIONAR</option>
-                        @foreach (var item in proveedores)
-                        {
-                            <option value="@item.IdProveedor">@item.Nombre</option>
-                        }
-                    </select>
-                    <span asp-validation-for="IdProveedor" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="form-group ">
-                    <label asp-for="Categoria" class="control-label"></label>
-
-                    <select asp-for="IdCategoria" class="form-control">
-                        <option selected value="">SELECCIONAR</option>
-                        @foreach (var item in categorias)
-                        {
-                            <option value="@item.IdCategoria">@item.Nombre</option>
-                        }
-                    </select>
-                    <span asp-validation-for="IdCategoria" class="text-danger"></span>
-                </div>
+        <div class="col-md-4">
+            <div class="form-group ">
+                <label asp-for="ModeloSerie" class="control-label"></label>
+                <input asp-for="ModeloSerie" class="form-control" />
+                <span asp-validation-for="ModeloSerie" class="text-danger"></span>
             </div>
         </div>
+
+
+
+      
+
+        <div class="col-md-4">
+            <div class="form-group ">
+                <label asp-for="PrecioCompra" class="control-label"></label>
+                <input asp-for="PrecioCompra" class="form-control" />
+                <span asp-validation-for="PrecioCompra" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group ">
+                <label asp-for="Porcentaje" class="control-label"></label>
+                <input asp-for="Porcentaje" class="form-control" />
+                <span asp-validation-for="Porcentaje" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group ">
+                <label asp-for="PrecioUnitario" class="control-label"></label>
+                <input asp-for="PrecioUnitario" class="form-control" />
+                <span asp-validation-for="PrecioUnitario" class="text-danger"></span>
+            </div>
+        </div>
+
+        @* RELACIONES BOTONES DESPLEGABLAS*@
+
+        <div class="col-md-4">
+            <div class="form-group ">
+                <label asp-for="Proveedor" class="control-label"></label>
+
+                <select asp-for="IdProveedor" class="form-control">
+                    <option selected value="">SELECCIONAR</option>
+                    @foreach (var item in proveedores)
+                    {
+                        <option value="@item.IdProveedor">@item.Nombre</option>
+                    }
+                </select>
+                <span asp-validation-for="IdProveedor" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group ">
+                <label asp-for="Categoria" class="control-label"></label>
+
+                <select asp-for="IdCategoria" class="form-control">
+                    <option selected value="">SELECCIONAR</option>
+                    @foreach (var item in categorias)
+                    {
+                        <option value="@item.IdCategoria">@item.Nombre</option>
+                    }
+                </select>
+                <span asp-validation-for="IdCategoria" class="text-danger"></span>
+            </div>
+        </div>
+
 
         @*BOTONES EDITADOS CON ICONOS*@
 
@@ -153,3 +171,32 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+<!-- Asegúrate de incluir este script después de cargar jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Escucha el evento de cambio en el campo de PrecioCompra
+        $('#PrecioCompra').on('input', function () {
+            actualizarPrecioUnitario();
+        });
+
+        // Escucha el evento de cambio en el campo de Porcentaje
+        $('#Porcentaje').on('input', function () {
+            actualizarPrecioUnitario();
+        });
+
+        function actualizarPrecioUnitario() {
+            // Obtén los valores actuales de PrecioCompra y Porcentaje
+            var precioCompra = parseFloat($('#PrecioCompra').val()) || 0;
+            var porcentaje = parseFloat($('#Porcentaje').val()) || 0;
+
+            // Calcula el nuevo valor de PrecioUnitario
+            var precioUnitario = precioCompra + (precioCompra * (porcentaje / 100));
+
+            // Actualiza el valor del campo PrecioUnitario
+            $('#PrecioUnitario').val(precioUnitario.toFixed(2)); // Ajusta el número de decimales según tus necesidades
+        }
+    });
+</script>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -37,11 +38,17 @@ namespace SysComercialMartinez.EntidadesDeNegocio
         [StringLength(50, ErrorMessage = "Maximo 50 caracteres")]
         public string Garantia { get; set; }
 
-        [Required(ErrorMessage = "PrecioUnitario es obligatorio")]
+        [ReadOnly(true)]
         public decimal PrecioUnitario { get; set; }
 
-        [Required(ErrorMessage = "la Cantidad es obligatorio")]
+        [Required(ErrorMessage = "La Cantidad es obligatorio")]
         public int Cantidad { get; set; }
+
+        [Required(ErrorMessage = "El Precio de compra es obligatorio")]
+        public decimal PrecioCompra { get; set; }
+
+        [Required(ErrorMessage = "La Cantidad es obligatorio")]
+        public int Porcentaje { get; set; }
 
         [ForeignKey("Proveedor")]
         [Required(ErrorMessage = "Proveedor es obligatorio")]

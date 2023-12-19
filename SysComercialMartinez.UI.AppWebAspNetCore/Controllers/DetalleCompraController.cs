@@ -212,6 +212,29 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
             ViewBag.ListaDetalle = ListaDetalle;
             return View();
         }
+
+        public async Task<IActionResult> Reportes(DetalleCompra pDetalleFactura, DateTime fInicio, DateTime fFinal, int NumeroVenta)
+        {
+            List<Compra> ventas = await CompraBL.ObtenerTodosAsync();
+            List<DetalleCompra> detalleCompras = await DetalleCompraBL.ObtenerTodosAsync();
+
+            if (NumeroVenta != 0)
+            {
+                ViewBag.Ventas = ventas.Where(r => r.IdCompra == NumeroVenta).ToList();
+            }
+            else if (fInicio.Year != 1 && fFinal.Year != 1)
+            {
+                ViewBag.Ventas = ventas.Where(r => r.FechaCompra.Date >= fInicio.Date && r.FechaCompra.Date <= fFinal.Date).ToList();
+            }
+            else
+            {
+                ViewBag.Ventas = ventas;
+            }
+
+            ViewBag.Detalles = detalleCompras;
+
+            return View();
+        }
     }
 
 }

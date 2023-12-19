@@ -263,7 +263,7 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 
             if (NumeroVenta != 0)
             {
-                ViewBag.Ventas = ventas.Where(r => r.NumeroVenta == NumeroVenta).ToList();
+                ViewBag.Ventas = ventas.Where(r => r.IdVenta == NumeroVenta).ToList();
             }
             else if (fInicio.Year != 1 && fFinal.Year != 1)
             {

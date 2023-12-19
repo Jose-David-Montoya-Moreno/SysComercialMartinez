@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SysComercialMartinez.EntidadesDeNegocio.DetalleVenta>
+﻿@model IEnumerable<SysComercialMartinez.EntidadesDeNegocio.DetalleCompra>
 @{
     ViewData["Title"] = "Reporte de Ventas";
     int numPage = 1;
@@ -6,11 +6,11 @@
     int numRegistrosPorPage = 10;
     int[] tops = { 10, 20, 50, 100, 500, 1000, 10000, -1 };
     int topActual = Convert.ToInt32(ViewBag.Top);
-    List<SysComercialMartinez.EntidadesDeNegocio.Venta> ventas = ViewBag.Ventas as List<SysComercialMartinez.EntidadesDeNegocio.Venta>;
+    List<SysComercialMartinez.EntidadesDeNegocio.Compra> compras = ViewBag.Compras as List<SysComercialMartinez.EntidadesDeNegocio.Compra>;
     List<SysComercialMartinez.EntidadesDeNegocio.Producto> productos = ViewBag.Producto as List<SysComercialMartinez.EntidadesDeNegocio.Producto>;
-    List<SysComercialMartinez.EntidadesDeNegocio.DetalleVenta> listaVentas = ViewBag.ListaVentas as List<SysComercialMartinez.EntidadesDeNegocio.DetalleVenta>;
+    List<SysComercialMartinez.EntidadesDeNegocio.DetalleCompra> listaCompras = ViewBag.ListaCompras as List<SysComercialMartinez.EntidadesDeNegocio.DetalleCompra>;
 
-    ViewBag.listaventas = listaVentas;
+    ViewBag.listacompras = listaCompras;
 
 }
 
@@ -85,21 +85,20 @@
     </form>
 </div>
 <div id="card-container">
-    @if (ventas != null)
+    @if (compras != null)
     {
         <!-- Agrega las referencias y los estilos de los calendarios -->
-        @foreach (var Listaventas in ventas)
+        @foreach (var Listacompras in compras)
         {
             <div>
                 <div class="customer-card">
                     <div class="customer-details">
-                        <div class="customer-name">Fecha Venta: @Listaventas.FechaVenta</div>
-                        <div class="customer-name">NFactura: @Listaventas.IdVenta</div>
-                        <div class="customer-name">Cliente: @Listaventas.NombreCliente</div>
-                        <div>Total: $@Listaventas.TotalPagado</div>
+                        <div class="customer-name">Fecha Venta: @Listacompras.FechaCompra</div>
+                        <div class="customer-name">NFactura: @Listacompras.IdCompra</div>
+                        <div>Total: $@Listacompras.TotalPago</div>
                     </div>
                     <div id="contentToExport">
-                        @foreach (var detalle in Listaventas.DetalleVenta)
+                        @foreach (var detalle in Listacompras.DetalleCompra)
                         {
                             <div class="product-list">
                                 <div class="product-item">
@@ -120,7 +119,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
+ <script>
     // Aquí puedes agregar lógica JavaScript para manejar la búsqueda y filtrado
     function buscar() {
         // Implementa la lógica de búsqueda aquí

@@ -112,9 +112,7 @@
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
+       
 
             <th>
                 @Html.DisplayNameFor(model => model.Garantia)
@@ -157,23 +155,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Nombre)
                 </td>
-
-                <td>
-                    <div class="descripcion">
-                        @if (!string.IsNullOrEmpty(item.Descripcion) && item.Descripcion.Length > 50)
-                        {
-                            <span class="short-description">@Html.DisplayFor(modelItem => item.Descripcion.Substring(0, 50))</span>
-                            <span class="full-description" style="display: none;">@Html.DisplayFor(modelItem => item.Descripcion)</span>
-                            <button class="show-more-button">Ver Más</button>
-                        }
-                        else
-                        {
-                            <span class="short-description">@Html.DisplayFor(modelItem => item.Descripcion)</span>
-                        }
-                    </div>
-                </td>
-
-
                 <td>
                     @Html.DisplayFor(modelItem => item.Garantia)
                 </td>

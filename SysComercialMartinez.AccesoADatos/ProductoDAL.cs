@@ -48,7 +48,9 @@ namespace SysComercialMartinez.AccesoADatos
                 producto.Garantia = pProducto.Garantia;
                 producto.Marca = pProducto.Marca;
                 producto.ModeloSerie = pProducto.ModeloSerie;
-                producto.Cantidad = pProducto.Cantidad;               
+                producto.Cantidad = pProducto.Cantidad;
+                producto.PrecioCompra = pProducto.PrecioCompra;
+                producto.Porcentaje = pProducto.Porcentaje;
                 producto.PrecioUnitario = pProducto.PrecioUnitario;
                 bdContexto.Update(producto);
                 result = await bdContexto.SaveChangesAsync();
