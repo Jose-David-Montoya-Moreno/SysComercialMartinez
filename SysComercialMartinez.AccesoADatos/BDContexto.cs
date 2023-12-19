@@ -20,6 +20,7 @@ namespace SysComercialMartinez.AccesoADatos
         public DbSet<Producto> Producto { get; set; }
         public DbSet<Proveedor> Proveedor { get; set; }
         public DbSet<Venta> Venta { get; set; }
+        public DbSet<Inventario> Inventario { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
