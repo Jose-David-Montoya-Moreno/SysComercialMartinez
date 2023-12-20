@@ -52,7 +52,7 @@ namespace SysComercialMartinez.AccesoADatos
             var detalleventa = new DetalleVenta();
             using (var bdContexto = new BDContexto())
             {
-                detalleventa= await bdContexto.DetalleVenta.FirstOrDefaultAsync(s => s.IdDetalleVenta == pDetalleVenta.IdDetalleVenta);
+                detalleventa = await bdContexto.DetalleVenta.FirstOrDefaultAsync(s => s.IdDetalleVenta == pDetalleVenta.IdDetalleVenta);
             }
             return detalleventa;
         }

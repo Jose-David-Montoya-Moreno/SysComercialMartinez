@@ -63,7 +63,7 @@ namespace SysComercialMartinez.AccesoADatos
             var Compra = new List<Compra>();
             using (var bdContexto = new BDContexto())
             {
-                Compra = await bdContexto.Compra.ToListAsync();
+                Compra = await bdContexto.Compra.Include(c => c.DetalleCompra).ThenInclude(p => p.Producto).ToListAsync();
             }
             return Compra;
         }

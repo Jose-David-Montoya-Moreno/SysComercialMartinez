@@ -36,6 +36,8 @@ namespace SysComercialMartinez.EntidadesDeNegocio
 
         public Usuario Usuario { get; set; }
 
+        public List<DetalleCompra>? DetalleCompra { get; set; }
+
         [NotMapped]
         public int Top_Aux { get; set; }
     }

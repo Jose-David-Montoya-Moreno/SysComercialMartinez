@@ -308,19 +308,15 @@
                 const codigo = button.getAttribute("data-codigo");
                 const nombre = button.getAttribute("data-nombre");
                 const descripcion = button.getAttribute("data-descripcion");
-                const stock = parseFloat(button.getAttribute("data-stock"));
                 const precio = parseFloat(button.getAttribute("data-precio"));
 
                 const cantidad = prompt(`Ingrese la cantidad para "${nombre}"`);
-                if (cantidad !== null && !isNaN(cantidad)) {
-                    if (cantidad > 0 && cantidad <= stock) {
-                        agregarProducto(productoid, codigo, nombre, descripcion, cantidad, precio);
-                    } else {
-                        alert("La cantidad deseada no se encuentra en stock");
-                    }
+                if (cantidad !== null && !isNaN(cantidad) && cantidad > 0) {
+                    agregarProducto(productoid, codigo, nombre, descripcion, parseFloat(cantidad), precio);
                 }
             });
         });
+
 
         function agregarProducto(productoid, codigo, nombre, descripcion, cantidad, precio) {
             const importeTotal = parseFloat(cantidad) * precio;
