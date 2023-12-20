@@ -15,7 +15,7 @@ namespace SysComercialMartinez.EntidadesDeNegocio
         public int IdInventario { get; set; }
 
         [Required(ErrorMessage = "Detalles es obligatorio")]
-        [StringLength(50, ErrorMessage = "Descripcion 50 caracteres")]
+        [StringLength(50, ErrorMessage = "Detalles 50 caracteres")]
         public string? Detalles { get; set;}
 
         [Required(ErrorMessage = "Cantidad es obligatorio")]
