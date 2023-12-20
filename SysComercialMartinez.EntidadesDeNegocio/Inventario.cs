@@ -13,7 +13,7 @@ namespace SysComercialMartinez.EntidadesDeNegocio
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdInventario { get; set; }
-
+        //Hola
         [Required(ErrorMessage = "Detalles es obligatorio")]
         [StringLength(50, ErrorMessage = "Detalles 50 caracteres")]
         public string? Detalles { get; set;}
