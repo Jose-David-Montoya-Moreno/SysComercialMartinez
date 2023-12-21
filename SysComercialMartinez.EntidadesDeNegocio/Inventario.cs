@@ -18,6 +18,9 @@ namespace SysComercialMartinez.EntidadesDeNegocio
         [StringLength(50, ErrorMessage = "Detalles 50 caracteres")]
         public string? Detalles { get; set;}
 
+        [Required(ErrorMessage = "Diferencia es obligatorio")]
+        public byte? Diferencia { get; set; }
+
         [Required(ErrorMessage = "Cantidad es obligatorio")]
         public int Cantidad { get; set; }
 

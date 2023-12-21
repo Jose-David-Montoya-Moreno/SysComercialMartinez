@@ -30,6 +30,7 @@ namespace SysComercialMartinez.AccesoADatos
                 inventario.IdProducto = pInventario.IdProducto;
                 inventario.IdUsuario = pInventario.IdUsuario;
                 inventario.Cantidad = pInventario.Cantidad;
+                inventario.Diferencia = pInventario.Diferencia;
                 inventario.Detalles = pInventario.Detalles;
                 bdContexto.Update(inventario);
                 result = await bdContexto.SaveChangesAsync();
