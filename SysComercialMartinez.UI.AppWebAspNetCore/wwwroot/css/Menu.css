@@ -16,27 +16,30 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #ff6a00;
+    background-color: #102c54;
     padding: 0px;
     overflow: auto;
     align-items: center;
-    align-content: flex-start;
     z-index: 2;
+    text-align: left; /* Añadido para centrar a la izquierda */
+    align-content: center; /* No es necesario en este contexto */
+    display:flex;
 }
 
 
     header .labelMenu {
         padding: 30px;
-        color: #FFf;
-        tansition: all 0.2s;
+        color: #FFF;
+        transition: all 0.2s;
         width: 40px;
         height: 70px;
         display: inline-block;
-        margin-left: auto;
+        margin-left: 0; /* Cambiado a 0 para alinear a la izquierda */
         margin-right: 0;
         text-align: center;
         line-height: 40px;
         border-radius: 1000px;
+        align-content: center; /* No es necesario en este contexto */
     }
 
         header .labelMenu:hover {

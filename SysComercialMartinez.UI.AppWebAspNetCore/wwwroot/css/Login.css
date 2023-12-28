@@ -3,6 +3,7 @@
 }
 
 body {
+    background-image: url('../IMG/ImagenFondo.jpg');
     margin: 0;
     padding: 0;
     font-family: sans-serif;
@@ -19,7 +20,7 @@ body {
     width: 425px;
     padding: 50px;
     transform: translate(-50%, -50%);
-    background: rgba(0,0,0,.4);
+    background: rgba(0,0,0,.8);
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0,0,5,.0);
     border-radius: 10px;
@@ -114,6 +115,7 @@ form {
 
     .btn.wider-button:hover {
         background-color: #000000; /* Cambia el color al pasar el mouse sobre el botón */
+        color:white;
     }
 
 .btn.regis-button {
@@ -130,5 +132,12 @@ form {
 
     .btn.regis-button:hover {
         background-color: #000000; /* Cambia el color al pasar el mouse sobre el botón */
+        color: white;
     }
+
+,imagenL{
+    height:100%;
+    width:100%;
+    margin-bottom:60%;
+}
 

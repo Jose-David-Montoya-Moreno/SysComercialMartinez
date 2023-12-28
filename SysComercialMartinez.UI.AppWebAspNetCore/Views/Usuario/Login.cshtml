@@ -13,14 +13,12 @@
 </head>
 
 <body>
+   
     <div class="login-box">
-        <div class="imagen">
-            <img src="~/IMG/ImagenFondo.jpg" alt="Fondo" />
-        </div>
-    <div class="login-box">
-         <div class="imagen">
+         <div class="imagenL">
         <img src="~/IMG/LogoMMsinFondo.png" alt="Logo" />
-    </div>
+        </div>
+   
 
         <form asp-action="Login" style="width: 15rem;">
 
@@ -43,8 +41,6 @@
 
                         <input type="submit" value="E N T R A R" class="btn wider-button" />
                     </div>
-                    <span class="text-danger">@ViewBag.Error</span>
-                    @Html.ActionLink("Registrarse", "Create",null,null,  new { @class = "btn regis-button" })
                 </a>
 
             </center>

@@ -1,7 +1,5 @@
 ﻿/* Estilo específico para la tabla con el ID "miTablaEspecial" */
 .tablaBusqueda {
-    border: 4px;
-    background: rgba(0,0,0,.4);
     max-height: 20px;
     height: 10px;
     width: 100%; /* Ancho de la tabla al 100% del contenedor */
