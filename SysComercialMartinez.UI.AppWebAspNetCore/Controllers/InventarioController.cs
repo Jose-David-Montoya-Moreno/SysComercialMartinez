@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SysComercialMartinez.EntidadesDeNegocio;
 using SysComercialMartinez.LogicaDeNegocio;
-
+using SysComercialMartinez.UI.AppWebAspNetCore.Models;
 
 namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 {
@@ -142,6 +142,50 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
                 if (Inventario.IdInventario > 0)
                     Inventario.Producto = await ProductoBL.ObtenerPorIdProductoAsync(new Producto { IdProducto = Inventario.IdProducto });
                 return View(Inventario);
+            }
+        }
+
+        public async Task<IActionResult> Ajuste()
+        {
+            ViewBag.Usuario = await usuarioBL.ObtenerTodosAsync();
+            ViewBag.Producto = await ProductoBL.ObtenerTodosAsync();
+            ViewBag.Error = "";
+            return View();
+        }
+
+        // POST: DetallePedidoController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Ajuste(Inventario pInventario, int Diferencia)
+        {
+            try
+            {
+                pInventario.IdUsuario = global.idu;
+
+                Producto objProducto = new Producto();
+                objProducto.IdProducto = pInventario.IdProducto;
+                objProducto = await ProductoBL.ObtenerPorIdProductoAsync(objProducto);
+
+                if (Diferencia == 1)
+                {
+                    objProducto.Cantidad = objProducto.Cantidad + pInventario.Cantidad;
+                    await ProductoBL.ModificarAsync(objProducto);
+                }
+                else if (Diferencia == 2)
+                {
+                    objProducto.Cantidad = objProducto.Cantidad - pInventario.Cantidad;
+                    await ProductoBL.ModificarAsync(objProducto);
+                }
+
+                int result = await inventarioBL.CrearAsync(pInventario);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                ViewBag.Usuario = await usuarioBL.ObtenerTodosAsync();
+                ViewBag.Producto = await ProductoBL.ObtenerTodosAsync();
+                return View(pInventario);
             }
         }
     }
