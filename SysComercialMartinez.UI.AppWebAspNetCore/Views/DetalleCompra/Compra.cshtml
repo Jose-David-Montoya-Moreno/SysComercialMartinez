@@ -12,10 +12,36 @@
     ViewBag.Detalles = detalleCompras;
 
 }
+<style>
+   
 
+    h1 {
+        display: inline-block;
+        margin: 0;
+    }
 
-<h1>Creación de ventas</h1>
+    #btncrear {
+        background-color: #005626;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        margin-left: 40px; /* Ajusta el margen según tus necesidades */
+        cursor: pointer;
+    }
 
+        #btncrear a {
+            text-decoration: none;
+            color: white;
+        }
+</style>
+
+<h1>Creación de compras</h1>
+
+<button class="btn btn-success" id="btncrear" style="background-color: #005626;">
+    <a asp-area="" asp-controller="Producto" asp-action="Create" style="color: white; text-decoration: none;">
+        <i class="fas fa-plus"></i> Producto
+    </a>
+</button>
 <div class="row">
 
     <!-- Cuadro de búsqueda de productos... -->
@@ -60,7 +86,7 @@
                                     Talla
                                 </th>
                                 <th>
-                                    Precio Unitario
+                                    Precio Compra
                                 </th>
                                 <th colspan="1">Acciones</th>
 
@@ -99,7 +125,7 @@
                                     </td>
 
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.PrecioUnitario)
+                                        @Html.DisplayFor(modelItem => item.PrecioCompra)
                                     </td>
                                     <td class="botonestabla">
                                         <button class="agregar-producto btn btn-sm btn-success btn-block"
@@ -108,7 +134,7 @@
                                             data-nombre="@item.Nombre"
                                             data-descripcion="@item.Descripcion"
                                             data-stock="@item.Cantidad"
-                                            data-precio="@item.PrecioUnitario">
+                                            data-precio="@item.PrecioCompra">
                                             <i class="fa fa-plus" aria-hidden="true"></i> Agregar
                                         </button>
                                     </td>
@@ -175,7 +201,7 @@
                                     @Html.DisplayFor(modelItem => item.Producto.Descripcion)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Producto.PrecioUnitario)
+                                    @Html.DisplayFor(modelItem => item.Producto.PrecioCompra)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.ValorTotal)

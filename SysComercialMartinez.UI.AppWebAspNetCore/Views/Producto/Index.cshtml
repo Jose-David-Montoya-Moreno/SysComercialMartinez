@@ -41,7 +41,7 @@
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class "control-label">Categoria</label>
+                            <label class "control-label">Categorias</label>
                             <select name="IdCategoria" class="form-control">
                                 <option selected value="0">SELECCIONAR</option>
                                 @foreach (var item in categorias)
@@ -104,9 +104,7 @@
 <table class="table table-responsive paginationjs">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Codigo)
-            </th>
+           
 
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
@@ -131,6 +129,12 @@
             </th>
 
             <th>
+                @Html.DisplayNameFor(model => model.PrecioCompra)
+            </th>
+
+           
+
+            <th>
                 @Html.DisplayNameFor(model => model.PrecioUnitario)
             </th>
 
@@ -149,9 +153,7 @@
         @foreach (var item in Model)
         {
             <tr data-page="@numPage">
-                <td>
-                    @Html.DisplayFor(modelItem => item.Codigo)
-                </td>
+              
                 <td>
                     @Html.DisplayFor(modelItem => item.Nombre)
                 </td>
@@ -167,6 +169,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.ModeloSerie)
                 </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrecioCompra)
+                </td>
+                
                 <td>
                     @Html.DisplayFor(modelItem => item.PrecioUnitario)
                 </td>
