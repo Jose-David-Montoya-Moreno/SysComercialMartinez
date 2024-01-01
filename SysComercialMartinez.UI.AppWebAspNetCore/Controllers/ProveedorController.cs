@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 {
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    //[Authorize(Roles = "SuperAdmin")]
+    [Authorize(Roles = "Administrador")]
     public class ProveedorController : Controller
     {
         ProveedorBL ProveedorBL = new ProveedorBL();

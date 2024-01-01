@@ -18,7 +18,7 @@ using SysComercialMartinez.AccesoADatos;
 namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 {
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    //[Authorize(Roles = "SuperAdmin")]
+    [Authorize(Roles = "Administrador")]
     public class CategoriaController : Controller
     {
         CategoriaBL CategoriaBL = new CategoriaBL();

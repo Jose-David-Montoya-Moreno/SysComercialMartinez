@@ -1,35 +1,54 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<div class="row">
-    <div class="action-card">
-        <img src="~/IMG/Usuario-removebg-preview.png" alt="Descripción de la imagen">
-        <a asp-area="" asp-controller="Usuario" asp-action="Create">Agregar Usuario</a>
+
+@if (User.IsInRole("Administrador"))
+{
+    <div class="row">
+        <div class="action-card">
+            <img src="~/IMG/Usuario-removebg-preview.png" alt="Descripción de la imagen">
+            <a asp-area="" asp-controller="Usuario" asp-action="Create">Agregar Usuario</a>
+        </div>
+        <div class="action-card">
+            <img src="~/IMG/descarga (3).jpg" alt="Descripción de la imagen">
+            <a asp-area="" asp-controller="Producto" asp-action="Create">Agregar Producto</a>
+        </div>
+        <div class="action-card">
+            <img src="~/IMG/Carritocompra-removebg-preview.png" alt="Descripción de la imagen">
+            <a asp-area="" asp-controller="DetalleCompra" class="action-card-button" asp-action="Compra">Crear Compra</a>
+        </div>
+        <div class="action-card">
+            <img src="~/IMG/Carritocompra-removebg-preview.png" alt="Descripción de la imagen">
+            <a asp-area="" asp-controller="DetalleVenta" class="action-card-button" asp-action="Venta">Crear Venta</a>
+        </div>
+        <div class="action-card">
+            <img src="~/IMG/LOS_REPORTES-removebg-preview.png" alt="Descripción de la imagen">
+            <a asp-area="" asp-controller="DetalleVenta" asp-action="Reportes">Ver Reportes</a>
+        </div>
+        <div class="action-card">
+            <img src="~/IMG/LOS_REPORTES-removebg-preview.png" alt="Descripción de la imagen">
+            <a asp-area="" asp-controller="DetalleCompra" asp-action="Reportes">Ver Reportes Compra</a>
+        </div>
     </div>
-    <div class="action-card">
-        <img src="~/IMG/descarga (3).jpg" alt="Descripción de la imagen">
-        <a asp-area="" asp-controller="Producto" asp-action="Create">Agregar Producto</a>
-    </div>
-    <div class="action-card">
-        <img src="~/IMG/Carritocompra-removebg-preview.png" alt="Descripción de la imagen">
-        <a asp-area="" asp-controller="DetalleCompra" class="action-card-button" asp-action="Compra">Crear Compra</a>
-    </div>
-    <div class="action-card">
-        <img src="~/IMG/Carritocompra-removebg-preview.png" alt="Descripción de la imagen">
-        <a asp-area="" asp-controller="DetalleVenta" class="action-card-button" asp-action="Venta">Crear Venta</a>
-    </div>
-    <div class="action-card">
-        <img src="~/IMG/LOS_REPORTES-removebg-preview.png" alt="Descripción de la imagen">
-        <a asp-area="" asp-controller="DetalleVenta" asp-action="Reportes">Ver Reportes</a>
-    </div>
-    <div class="action-card">
-        <img src="~/IMG/LOS_REPORTES-removebg-preview.png" alt="Descripción de la imagen">
-        <a asp-area="" asp-controller="DetalleCompra" asp-action="Reportes">Ver Reportes Compra</a>
-    </div>
-</div>
+}
 
 
+@if (User.IsInRole("Cajero"))
 
+{
+    <div class="row">
+        <div class="action-card">
+            <img src="~/IMG/Carritocompra-removebg-preview.png" alt="Descripción de la imagen">
+            <a asp-area="" asp-controller="DetalleVenta" class="action-card-button" asp-action="Venta">Crear Venta</a>
+        </div>
+
+        <div class="action-card">
+            <img src="~/IMG/LOS_REPORTES-removebg-preview.png" alt="Descripción de la imagen">
+            <a asp-area="" asp-controller="DetalleVenta" asp-action="Reportes">Ver Reportes</a>
+        </div>
+    </div>
+
+}
 
 
 

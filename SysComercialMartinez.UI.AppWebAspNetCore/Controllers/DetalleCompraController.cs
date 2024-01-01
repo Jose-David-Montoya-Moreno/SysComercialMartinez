@@ -9,7 +9,7 @@ using SysComercialMartinez.UI.AppWebAspNetCore.Models;
 namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 {
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    //[Authorize(Roles = "SuperAdmin")]
+    [Authorize(Roles = "Administrador,Cajero")]
 
     public class DetalleCompraController : Controller
     {

@@ -13,7 +13,7 @@ using SysComercialMartinez.UI.AppWebAspNetCore.Models;
 namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 {
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    //[Authorize(Roles = "SuperAdmin")]
+    [Authorize(Roles = "Administrador")]
     public class InventarioController : Controller
     {
         InventarioBL inventarioBL = new InventarioBL();

@@ -14,8 +14,8 @@ using SysComercialMartinez.AccesoADatos;
 
 namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 {
-    //[Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    //[Authorize(Roles = "Cajero,SuperAdmin")]
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+    [Authorize(Roles = "Administrador,Cajero")]
     public class VentaController : Controller
     {
         VentaBL VentaBL = new VentaBL();

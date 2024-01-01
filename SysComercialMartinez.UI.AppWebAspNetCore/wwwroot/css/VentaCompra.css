@@ -241,3 +241,10 @@
     font-size: 120%;
     margin-left: 160px;
 }
+
+.Ajuste {
+    border-color: #102c54;
+    border-radius:10px;
+    height:auto;
+    width:80%;
+}

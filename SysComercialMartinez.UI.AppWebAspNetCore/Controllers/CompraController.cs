@@ -16,7 +16,7 @@ using SysComercialMartinez.LogicaDeNegocio;
 namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 {
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    //[Authorize(Roles = "SuperAdmin")]
+    [Authorize(Roles = "Administrador,Cajero")]
     public class CompraController : Controller
     {
         CompraBL CompraBL = new CompraBL();

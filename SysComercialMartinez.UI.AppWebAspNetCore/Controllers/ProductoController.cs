@@ -16,8 +16,8 @@ using SysComercialMartinez.UI.AppWebAspNetCore.Models;
 
 namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 {
-    //[Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-    //[Authorize(Roles = "SuperAdmin,Admin")]
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+    [Authorize(Roles = "Administrador")]
     public class ProductoController : Controller
     {
        

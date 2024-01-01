@@ -13,7 +13,8 @@ using SysComercialMartinez.EntidadesDeNegocio;
 
 namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
 {
-    //[Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+    [Authorize(Roles = "Administrador")]
     public class RolController : Controller
     {
         RolBL rolBL = new RolBL();
