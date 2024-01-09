@@ -41,7 +41,7 @@ namespace SysComercialMartinez.EntidadesDeNegocio
         [ReadOnly(true)]
         public decimal PrecioUnitario { get; set; }
 
-        [Required(ErrorMessage = "La Cantidad es obligatorio")]
+        
         public int Cantidad { get; set; }
 
         [Required(ErrorMessage = "El Precio de compra es obligatorio")]
