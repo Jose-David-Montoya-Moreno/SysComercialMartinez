@@ -82,13 +82,15 @@
                                 <th>
                                     Nombre
                                 </th>
-
+                                 <th>
+                                    En Stock
+                                </th>
                                 <th>
                                     Descripcion
                                 </th>
 
                                 <th>
-                                    Talla
+                                    Marca
                                 </th>
                                 <th>
                                     Precio Compra
@@ -108,7 +110,9 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Nombre)
                                     </td>
-
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cantidad)
+                                    </td>
                                     <td>
                                         <div class="descripcion">
                                             @if (!string.IsNullOrEmpty(item.Descripcion) && item.Descripcion.Length > 50)
@@ -245,7 +249,7 @@
 
             <div class="BarraSuperior">
                 <button id="btnTerminarGuardarVenta" type="submit" class="BtnImprimir" onclick="return confirmarTerminarVenta()">
-                    <i class="fa fa-print" aria-hidden="true"></i> Imprimir y Terminar Venta
+                    <i class="fa fa-print" aria-hidden="true"></i> Imprimir y Terminar Compra
                 </button>
 
             </div>

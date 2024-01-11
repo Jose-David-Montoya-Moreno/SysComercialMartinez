@@ -52,13 +52,15 @@
                                 <th>
                                     Nombre
                                 </th>
-
+                                <th>
+                                    En Stock
+                                </th>
                                 <th>
                                     Descripcion
                                 </th>
 
                                 <th>
-                                    Talla
+                                    Marca
                                 </th>
                                 <th>
                                     Precio Unitario
@@ -78,7 +80,9 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Nombre)
                                     </td>
-
+                                     <td>
+                                        @Html.DisplayFor(modelItem => item.Cantidad)
+                                    </td>
                                     <td>
                                         <div class="descripcion">
                                             @if (!string.IsNullOrEmpty(item.Descripcion) && item.Descripcion.Length > 50)

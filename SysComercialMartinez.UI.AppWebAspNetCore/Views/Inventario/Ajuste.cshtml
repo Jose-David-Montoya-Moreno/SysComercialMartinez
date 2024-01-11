@@ -7,21 +7,21 @@
 
 }
 
-<div class="Ajuste">
-    <h1>Crear</h1>
-
-    <h4>Inventario</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Ajuste">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Cantidad" class="control-label"></label>
-                    <input asp-for="Cantidad" class="form-control" />
+<div class="Ajuste-container">
+    <div class="Ajuste">
+        <h1>Crear</h1>
+        <h4>Inventario</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Ajuste">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                   <div class="form-group">
+                    <label asp-for="Cantidad" class="control-label" ></label>
+                    <input asp-for="Cantidad"  class="form-control" oninput="validarInput(this)"  />
                     <span asp-validation-for="Cantidad" class="text-danger"></span>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label asp-for="Diferencia" class="control-label"></label>
                         <select asp-for="Diferencia" class="form-control">
@@ -38,7 +38,7 @@
                     <span asp-validation-for="Detalles" class="text-danger"></span>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="IdProducto" class="control-label"></label>
                             <select asp-for="IdProducto" class="form-control">
@@ -52,26 +52,64 @@
                         </div>
                     </div>
                 </div>
+               
 
-
-                @*BOTONES EDITADOS CON ICONOS*@
-
-                <div class="form-group" style="margin-top: 10px;">
-                    <button type="submit" class="btn btn-success" style="margin-right: 10px;">
-                        <i class="fas fa-save"></i> Guardar
-                    </button>
-
-                    <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
-                        <i class="fas fa-times"></i> Cancelar
-                    </button>
-                </div>
-
-                <span class="text-danger">@ViewBag.Error</span>
-
-            </form>
+                    <!-- Resto de tus campos -->
+                    @*BOTONES EDITADOS CON ICONOS*@
+                    <div class="form-group" style="margin-top: 10px; text-align: center;">
+                        <button type="submit" class="btn btn-success" style="margin-right: 10px;">
+                            <i class="fas fa-save"></i> Guardar
+                        </button>
+                        <button type="button" class="btn btn-danger" onclick="window.location.href='@Url.Action("Index")'" style="margin-left: 10px;">
+                            <i class="fas fa-times"></i> Cancelar
+                        </button>
+                    </div>
+                    <span class="text-danger">@ViewBag.Error</span>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
+
+<style>
+    .Ajuste-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh; /* Reduje la altura del contenedor */
+        background: #A60CE4; /* Cambié el color a #2060D6 */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px; /* Reduje el radio del borde */
+        padding: 20px;
+    }
+
+    .Ajuste {
+        width: 100%; /* Hace que el contenedor interno tenga el 100% de ancho */
+    }
+
+    /* Estilos adicionales si es necesario */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .text-danger {
+        color: red;
+    }
+</style>
+
+<script>
+    function validarInput(input) {
+        // Obtener el valor actual del campo de entrada
+        var valor = input.value;
+
+        // Eliminar los caracteres no deseados (por ejemplo, < y >)
+        valor = valor.replace(/[<>]/g, '');
+
+        // Asignar el valor modificado de vuelta al campo de entrada
+        input.value = valor;
+    }
+</script>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
