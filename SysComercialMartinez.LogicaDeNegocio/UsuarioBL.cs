@@ -15,9 +15,9 @@ namespace SysComercialMartinez.LogicaDeNegocio
         {
             return await UsuarioDAL.CrearAsync(pUsuario);
         }
-        public async Task<int> ModificarAsync(Usuario pUsuario)
+        public async Task<int> ModificarAsync(Usuario pUsuario, string pPasswordAnt)
         {
-            return await UsuarioDAL.ModificarAsync(pUsuario);
+            return await UsuarioDAL.ModificarAsync(pUsuario,pPasswordAnt);
         }
         public async Task<int> EliminarAsync(Usuario pUsuario)
         {

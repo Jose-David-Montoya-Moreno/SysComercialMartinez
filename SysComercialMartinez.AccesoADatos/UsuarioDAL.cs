@@ -50,22 +50,29 @@ namespace SysComercialMartinez.AccesoADatos
             }
             return result;
         }
-        public static async Task<int> ModificarAsync(Usuario pUsuario)
+        public static async Task<int> ModificarAsync(Usuario pUsuario, string pPasswordAnt)
         {
             int result = 0;
+            var usuarioPassAnt = new Usuario { Password = pPasswordAnt };
+            EncriptarMD5(usuarioPassAnt);
             using (var bdContexto = new BDContexto())
             {
                 bool existeLogin = await ExisteLogin(pUsuario, bdContexto);
-                if (existeLogin == false)
+                if (existeLogin == false )
                 {
                     var usuario = await bdContexto.Usuario.FirstOrDefaultAsync(s => s.Id == pUsuario.Id);
-                    usuario.IdRol = pUsuario.IdRol;
-                    usuario.Nombre = pUsuario.Nombre;
-                    usuario.Apellido = pUsuario.Apellido;
-                    usuario.Login = pUsuario.Login;
-                    usuario.Estatus = pUsuario.Estatus;
-                    bdContexto.Update(usuario);
-                    result = await bdContexto.SaveChangesAsync();
+                    if (usuarioPassAnt.Password == usuario.Password)
+                    {
+                        usuario.IdRol = pUsuario.IdRol;
+                        usuario.Nombre = pUsuario.Nombre;
+                        usuario.Apellido = pUsuario.Apellido;
+                        usuario.Login = pUsuario.Login;
+                        usuario.Estatus = pUsuario.Estatus;
+                        EncriptarMD5(pUsuario);
+                        usuario.Password = pUsuario.Password;
+                        bdContexto.Update(usuario);
+                        result = await bdContexto.SaveChangesAsync();
+                    }
                 }
                 else
                     throw new Exception("Login ya existe");

@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Edit";
     List<SysComercialMartinez.EntidadesDeNegocio.Rol> roles = ViewBag.Roles as List<SysComercialMartinez.EntidadesDeNegocio.Rol>;
+
 }
 
 <h1>Modificar Usuario</h1>
@@ -18,6 +19,7 @@
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
         </div>
+      
         <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="Apellido" class="control-label"></label>
@@ -80,6 +82,36 @@
                 <span asp-validation-for="Login" class="text-danger"></span>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">Contraseña Actual</label>
+                <input type="password" name="pPasswordAnt" class="form-control" required />
+            </div>
+        </div>
+         <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">Contraseña Nueva</label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="ConfirmPassword_aux" class="control-label">Confirmar Contraseña Nueva</label>
+                <input asp-for="ConfirmPassword_aux" class="form-control" />
+                <span asp-validation-for="ConfirmPassword_aux" class="text-danger"></span>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+        </div>
+
     </div>
 
     @*BOTONES EDITADOS CON ICONOS*@
