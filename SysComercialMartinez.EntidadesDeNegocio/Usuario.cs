@@ -42,7 +42,6 @@ namespace SysComercialMartinez.EntidadesDeNegocio
         [NotMapped]
         [StringLength(32, ErrorMessage = "Password debe estar entre 5 a 32 caracteres", MinimumLength = 5)]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Password y confirmar password deben de ser iguales")]
         [Display(Name = "Confirmar password")]
         public string ConfirmPassword_aux { get; set; }
 }

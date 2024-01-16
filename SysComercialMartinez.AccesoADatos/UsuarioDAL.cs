@@ -50,18 +50,16 @@ namespace SysComercialMartinez.AccesoADatos
             }
             return result;
         }
-        public static async Task<int> ModificarAsync(Usuario pUsuario, string pPasswordAnt)
+        public static async Task<int> ModificarAsync(Usuario pUsuario)
         {
             int result = 0;
-            var usuarioPassAnt = new Usuario { Password = pPasswordAnt };
-            EncriptarMD5(usuarioPassAnt);
+            
             using (var bdContexto = new BDContexto())
             {
                 bool existeLogin = await ExisteLogin(pUsuario, bdContexto);
                 if (existeLogin == false )
                 {
                     var usuario = await bdContexto.Usuario.FirstOrDefaultAsync(s => s.Id == pUsuario.Id);
-                    if (usuarioPassAnt.Password == usuario.Password)
                     {
                         usuario.IdRol = pUsuario.IdRol;
                         usuario.Nombre = pUsuario.Nombre;

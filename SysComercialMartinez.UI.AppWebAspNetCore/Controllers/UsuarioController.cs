@@ -93,11 +93,11 @@ namespace SysComercialMartinez.UI.AppWebAspNetCore.Controllers
         // POST: UsuarioController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Usuario pUsuario, string pPasswordAnt)
+        public async Task<IActionResult> Edit(int id, Usuario pUsuario)
         {
             try
             {
-                int result = await usuarioBL.ModificarAsync(pUsuario, pPasswordAnt);
+                int result = await usuarioBL.ModificarAsync(pUsuario);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
