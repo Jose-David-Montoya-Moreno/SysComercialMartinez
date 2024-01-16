@@ -17,6 +17,44 @@
 
 <h1>Creación de ventas</h1>
 
+<div class="card border-info">
+    <h6 class="TextLitlle">Informacion del Cliente</h6>
+    <div class="card-body">
+        <div class="row align-items-star">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">DUI</label>
+                    <input type="text" id="DUI" class="form-control" name="DUI" placeholder="Ingrese su DUI" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">Nombre</label>
+                    <input type="text" id="NombreCliente" class="form-control" name="NombreCliente" placeholder="Ingrese su nombre" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">Teléfono</label>
+                    <input type="text" id="Telefono" class="form-control" name="Telefono" placeholder="Ingrese su teléfono" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">Dirección</label>
+                    <input type="text" id="Direccion" class="form-control" name="Direccion" placeholder="Ingrese su dirección" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">Correo</label>
+                    <input type="text" id="Correo" class="form-control" name="Correo" placeholder="Ingrese su correo" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
 <div class="row">
 
     <!-- Cuadro de búsqueda de productos... -->
@@ -143,6 +181,7 @@
 
 
 
+
 <hr class="Separation" />
 <form asp-controller="DetalleVenta" asp-action="ProcesarFactura" method="post">
     <div class="row mt-3">
@@ -224,39 +263,7 @@
 
             </div>
             <div class="card-body p-2 card-venta">
-                <div class="row align-items-star">
-
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label">DUI</label>
-                            <input type="text" id="DUI" class="form-control" name="DUI" placeholder="Ingrese su correo" />
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label">Nombre</label>
-                            <input type="text" id="NombreCliente" class="form-control" name="NombreCliente" placeholder="Ingrese su nombre" />
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label">Telefono</label>
-                            <input type="text" id="Telefono" class="form-control" name="Telefono" placeholder="Ingrese su telefono" />
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label">Direccion</label>
-                            <input type="text" id="Direccion" class="form-control" name="Direccion" placeholder="Ingrese su direccion" />
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label">Correo</label>
-                            <input type="text" id="Correo" class="form-control" name="Correo" placeholder="Ingrese su correo" />
-                        </div>
-                    </div>
-                </div>
+                
                 <br />
                 <div class="row align-items-star">
                     <div class="col-sm-4">
