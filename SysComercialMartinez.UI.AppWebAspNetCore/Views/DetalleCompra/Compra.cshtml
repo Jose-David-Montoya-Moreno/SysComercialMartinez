@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Venta";
     int numPage = 1;
     int numRegistros = 0;
@@ -13,7 +12,7 @@
 
 }
 <style>
-   
+
 
     h1 {
         display: inline-block;
@@ -33,20 +32,69 @@
             text-decoration: none;
             color: white;
         }
+
+
+
 </style>
 
 <h1>Creación de compras</h1>
 
-<button class="btn btn-success" id="btncrear" style="background-color: #005626;">
-    <a asp-area="" asp-controller="Producto" asp-action="Create" style="color: white; text-decoration: none;">
-        <i class="fas fa-plus"></i> Producto
-    </a>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="Asignar Datos">
+    Agregar Proveedor
 </button>
-<button class="btn btn-success" id="btncrear" style="background-color:blueviolet;">
-    <a asp-area="" asp-controller="Proveedor" asp-action="Create" style="color: white; text-decoration: none;">
-        <i class="fas fa-plus"></i> Proveedor
-    </a>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Título del Modal
+                </h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Contenido del cuerpo del modal -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalx" data-bs-whatever="Asignar Datos">
+    Agregar Producto
 </button>
+
+
+<div class="modal fade" id="exampleModalx" tabindex="-1" role="dialog" aria - labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Crear Producto
+                </h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="row">
 
     <!-- Cuadro de búsqueda de productos... -->
@@ -82,7 +130,7 @@
                                 <th>
                                     Nombre
                                 </th>
-                                 <th>
+                                <th>
                                     En Stock
                                 </th>
                                 <th>
@@ -91,6 +139,9 @@
 
                                 <th>
                                     Marca
+                                </th>
+                                <th>
+                                    Proveedor
                                 </th>
                                 <th>
                                     Precio Compra
@@ -131,6 +182,9 @@
 
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Marca)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Proveedor.Nombre)
                                     </td>
 
                                     <td>
@@ -406,18 +460,18 @@
                 indeceFila++;
                 const row = document.createElement("tr");
                 row.innerHTML = `
-                                <td><input name='detalleCompras[${indeceFila}].IdProducto' value='${detalle.productoid}'  readonly="readonly" class="PrimeraColumna"/></td>
-                                     <td><input name='detalleCompras[${indeceFila}].Cantidad' value='${detalle.cantidad}'  readonly="readonly" class="SiguientesColumnas" /></td>
-                                     <td><input name='detalleCompras[${indeceFila}].Nombre' value='${detalle.nombre}'  readonly="readonly" class="SiguientesColumnas"/></td>
-                                     <td><input name='detalleCompras[${indeceFila}].Descripcion' value='${detalle.descripcion}'  readonly="readonly" class="SiguientesColumnas" /></td>
-                                    <td><input name='detalleCompras[${indeceFila}].Precio' value='${detalle.precio}'  readonly="readonly" class="SiguientesColumnas"/></td>
-                                     <td><input name='detalleCompras[${indeceFila}].ValorTotal' value='${detalle.importeTotal}'  readonly="readonly" class="SiguientesColumnas" /></td>
-                                <td>
-                                    <button class="eliminar-producto btn btn-danger" data-index="${index}">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            `;
+                                        <td><input name='detalleCompras[${indeceFila}].IdProducto' value='${detalle.productoid}'  readonly="readonly" class="PrimeraColumna"/></td>
+                                             <td><input name='detalleCompras[${indeceFila}].Cantidad' value='${detalle.cantidad}'  readonly="readonly" class="SiguientesColumnas" /></td>
+                                             <td><input name='detalleCompras[${indeceFila}].Nombre' value='${detalle.nombre}'  readonly="readonly" class="SiguientesColumnas"/></td>
+                                             <td><input name='detalleCompras[${indeceFila}].Descripcion' value='${detalle.descripcion}'  readonly="readonly" class="SiguientesColumnas" /></td>
+                                            <td><input name='detalleCompras[${indeceFila}].Precio' value='${detalle.precio}'  readonly="readonly" class="SiguientesColumnas"/></td>
+                                             <td><input name='detalleCompras[${indeceFila}].ValorTotal' value='${detalle.importeTotal}'  readonly="readonly" class="SiguientesColumnas" /></td>
+                                        <td>
+                                            <button class="eliminar-producto btn btn-danger" data-index="${index}">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    `;
                 tbody.appendChild(row);
             });
 
@@ -548,6 +602,37 @@
     }
 
 
+
+
+    var exampleModal = document.getElementById('exampleModal');
+    exampleModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var recipient = button.getAttribute('data-bs-whatever');
+
+        $.get('/Proveedor/Create', function (data) {
+            var modalTitle = exampleModal.querySelector('.modal-title');
+            modalTitle.textContent = 'Proveedor' + recipient;
+
+            var modalBody = exampleModal.querySelector('.modal-body');
+            modalBody.innerHTML = data;
+        });
+    });
+
+
+    //modal de producto
+    var exampleModalx = document.getElementById('exampleModalx');
+    exampleModalx.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var recipient = button.getAttribute('data-bs-whatever');
+
+        $.get('/Producto/Create', function (data) {
+            var modalTitle = exampleModal.querySelector('.modal-title');
+            modalTitle.textContent = 'Producto' + recipient;
+
+            var modalBody = exampleModalx.querySelector('.modal-body');
+            modalBody.innerHTML = data;
+        });
+    });
 
 
 </script>
