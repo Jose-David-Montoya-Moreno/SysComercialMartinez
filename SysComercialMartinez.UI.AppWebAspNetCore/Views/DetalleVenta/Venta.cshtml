@@ -266,22 +266,21 @@
                 
                 <br />
                 <div class="row align-items-star">
+
                     <div class="col-sm-4">
                         <div class="input-group input-group-sm mb-2">
                             <div class="input-group-prepend">
-                                <label class="DataCustomer" for="inputGroupSelect01">Monto Base</label>
+                                <label class="DataCustomer" for="inputGroupSelect01">IGV.</label>
                             </div>
-                            <input id="txttotal" name="total" readonly type="text" class="form-control" value="0">
+                            <input id="txtigv" name="impuesto" readonly type="text" class="form-control" value="0">
                         </div>
                     </div>
-
-
                     <div class="col-sm-4">
                         <div class="input-group input-group-sm mb-2">
                             <div class="input-group-prepend">
                                 <label class="DataCustomer" for="inputGroupSelect01">IVA.</label>
                             </div>
-                            <input id="txtigv" name="impuesto" readonly type="text" class="form-control" value="0">
+                            <input id="txtiva" name="impuesto" readonly type="text" class="form-control" value="0">
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -351,6 +350,7 @@
         const eliminarProductoButtons = document.querySelectorAll(".eliminar-producto");
         const txtsubtotal = document.getElementById("txtsubtotal");
         const txtigv = document.getElementById("txtigv");
+        const txtiva = document.getElementById("txtiva");
         const txttotal = document.getElementById("txttotal");
         const txtmontopago = document.getElementById("txtmontopago");
         const btncalcular = document.getElementById("btncalcular");
@@ -401,20 +401,7 @@
             calculateTotal();
         }
 
-        function agregarProducto(productoid, codigo, nombre, descripcion, cantidad, precio) {
-            const importeTotal = parseFloat(cantidad) * precio;
-            detalleVentas.push({
-                productoid: productoid,
-                codigo: codigo,
-                nombre: nombre,
-                descripcion: descripcion,
-                cantidad: parseFloat(cantidad),
-                precio: precio,
-                importeTotal: importeTotal,
-            });
-            updateDetalleVentaTable();
-            calculateTotal();
-        }
+        
 
         eliminarProductoButtons.forEach(function (button) {
             button.addEventListener("click", function () {
@@ -479,11 +466,11 @@
                 subtotal += detalle.importeTotal;
             });
 
-            const igv = subtotal * 0.13; // IGV del 13%
-            const total = subtotal - igv;
+            const igv = subtotal / 1.13 // IGV del 13%
+            const iva = subtotal - igv
 
-            txtsubtotal.value = subtotal.toFixed(2);
             txtigv.value = igv.toFixed(2);
+            txtiva.value = iva.toFixed(2);
             txttotal.value = total.toFixed(2);
         }
 

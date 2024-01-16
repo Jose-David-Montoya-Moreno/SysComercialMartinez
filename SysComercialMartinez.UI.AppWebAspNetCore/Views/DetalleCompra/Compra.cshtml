@@ -500,7 +500,7 @@
                 subtotal += detalle.importeTotal;
             });
 
-            const igv = subtotal * 0.13; // IGV del 13%
+            const igv = subtotal / 1.13; // IGV del 13%
             const total = subtotal - igv;
 
             txtsubtotal.value = subtotal.toFixed(2);
