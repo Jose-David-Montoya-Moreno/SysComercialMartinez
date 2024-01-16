@@ -27,6 +27,7 @@ namespace SysComercialMartinez.EntidadesDeNegocio
         [Required(ErrorMessage = "Login es obligatorio")]
         [StringLength(25, ErrorMessage = "Maximo 25 caracteres")]
         public string Login { get; set; }
+
         [DataType(DataType.Password)]
         [StringLength(32, ErrorMessage = "Password debe estar entre 5 a 32 caracteres", MinimumLength = 5)]
         public string Password { get; set; }
@@ -39,9 +40,11 @@ namespace SysComercialMartinez.EntidadesDeNegocio
         public Rol Rol { get; set; }
         [NotMapped]
         public int Top_Aux { get; set; }
+
         [NotMapped]
         [StringLength(32, ErrorMessage = "Password debe estar entre 5 a 32 caracteres", MinimumLength = 5)]
         [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "Password y confirmar password deben de ser iguales")]
         [Display(Name = "Confirmar password")]
         public string ConfirmPassword_aux { get; set; }
 }
