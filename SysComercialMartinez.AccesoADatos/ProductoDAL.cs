@@ -82,7 +82,7 @@ namespace SysComercialMartinez.AccesoADatos
             var Productos = new List<Producto>();
             using (var bdContexto = new BDContexto())
             {
-                Productos = await bdContexto.Producto.ToListAsync();
+                Productos = await bdContexto.Producto.Include(p =>p.Proveedor).Include (c =>c.Categoria).ToListAsync();
             }
             return Productos;
         }

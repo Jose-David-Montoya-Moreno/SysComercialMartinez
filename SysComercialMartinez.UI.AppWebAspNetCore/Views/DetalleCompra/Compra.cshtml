@@ -146,7 +146,7 @@
                                 <th>
                                     Precio Compra
                                 </th>
-                                <th colspan="1">Acciones</th>
+                                <th colspan="1">Agg</th>
 
                             </tr>
                         </thead>
@@ -184,7 +184,7 @@
                                         @Html.DisplayFor(modelItem => item.Marca)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Proveedor.Nombre)
+                                        @Html.DisplayFor(productos => item.Proveedor.Nombre)
                                     </td>
 
                                     <td>
@@ -198,7 +198,7 @@
                                             data-descripcion="@item.Descripcion"
                                             data-stock="@item.Cantidad"
                                             data-precio="@item.PrecioCompra">
-                                            <i class="fa fa-plus" aria-hidden="true"></i> Agregar
+                                            <i class="fa fa-plus" aria-hidden="true"></i> 
                                         </button>
                                     </td>
 
@@ -312,12 +312,19 @@
                     <div class="col-sm-4">
                         <div class="input-group input-group-sm mb-2">
                             <div class="input-group-prepend">
-                                <label class="DataCustomer" for="inputGroupSelect01">Monto Base</label>
+                                <label class="DataCustomer" for="inputGroupSelect01">Monto base</label>
                             </div>
-                            <input id="txttotal" name="total" readonly type="text" class="form-control" value="0">
+                            <input id="txtigv" name="impuesto" readonly type="text" class="form-control" value="0">
                         </div>
                     </div>
-
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm mb-2">
+                            <div class="input-group-prepend">
+                                <label class="DataCustomer" for="inputGroupSelect01">IVA.</label>
+                            </div>
+                            <input id="txtiva" name="impuesto" readonly type="text" class="form-control" value="0">
+                        </div>
+                    </div>
                     <div class="col-sm-4">
                         <div class="input-group input-group-sm mb-2">
                             <div class="form-group">
@@ -385,6 +392,7 @@
         const eliminarProductoButtons = document.querySelectorAll(".eliminar-producto");
         const txtsubtotal = document.getElementById("txtsubtotal");
         const txtigv = document.getElementById("txtigv");
+        const txtiva = document.getElementById("txtiva");
         const txttotal = document.getElementById("txttotal");
         const txtmontopago = document.getElementById("txtmontopago");
         const btncalcular = document.getElementById("btncalcular");
@@ -406,21 +414,6 @@
             });
         });
 
-
-        function agregarProducto(productoid, codigo, nombre, descripcion, cantidad, precio) {
-            const importeTotal = parseFloat(cantidad) * precio;
-            detalleCompras.push({
-                productoid: productoid,
-                codigo: codigo,
-                nombre: nombre,
-                descripcion: descripcion,
-                cantidad: parseFloat(cantidad),
-                precio: precio,
-                importeTotal: importeTotal,
-            });
-            updateDetalleCompraTable();
-            calculateTotal();
-        }
 
         function agregarProducto(productoid, codigo, nombre, descripcion, cantidad, precio) {
             const importeTotal = parseFloat(cantidad) * precio;
@@ -496,15 +489,15 @@
 
         function calculateTotal() {
             let subtotal = 0;
-            detalleCompras.forEach(function (detalle) {
+            detalleVentas.forEach(function (detalle) {
                 subtotal += detalle.importeTotal;
             });
 
-            const igv = subtotal / 1.13; // IGV del 13%
-            const total = subtotal - igv;
+            const igv = subtotal / 1.13 // IGV del 13%
+            const iva = subtotal - igv
 
-            txtsubtotal.value = subtotal.toFixed(2);
             txtigv.value = igv.toFixed(2);
+            txtiva.value = iva.toFixed(2);
             txttotal.value = total.toFixed(2);
         }
 
