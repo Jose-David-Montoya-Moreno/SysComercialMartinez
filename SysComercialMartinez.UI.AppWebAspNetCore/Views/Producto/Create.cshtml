@@ -1,6 +1,6 @@
 ﻿@model SysComercialMartinez.EntidadesDeNegocio.Producto
 @{
-    Layout = null;
+    //Layout = null;
 }
 
 @{
@@ -168,34 +168,5 @@
 }
 
 <!-- Asegúrate de incluir este script después de cargar jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-<script>
-    $(document).ready(function () {
-        // Escucha el evento de cambio en el campo de PrecioCompra
-        $('#PrecioCompra').on('input', function () {
-            actualizarPrecioUnitario();
-        });
 
-        // Escucha el evento de cambio en el campo de Porcentaje
-        $('#Porcentaje').on('input', function () {
-            actualizarPrecioUnitario();
-        });
-
-        function actualizarPrecioUnitario() {
-            // Obtén los valores actuales de PrecioCompra y Porcentaje
-            var precioCompra = parseFloat($('#PrecioCompra').val()) || 0;
-            var porcentaje = parseFloat($('#Porcentaje').val()) || 0;
-
-            // Calcula el nuevo valor de PrecioUnitario
-            var precioUnitario = precioCompra + (precioCompra * (porcentaje / 100));
-
-            // Actualiza el valor del campo PrecioUnitario
-            $('#PrecioUnitario').val(precioUnitario.toFixed(2)); // Ajusta el número de decimales según tus necesidades
-        }
-    });
-
-    
-     
-
-</script>
