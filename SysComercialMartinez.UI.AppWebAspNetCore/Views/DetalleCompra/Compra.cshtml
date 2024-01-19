@@ -314,7 +314,7 @@
                             <div class="input-group-prepend">
                                 <label class="DataCustomer" for="inputGroupSelect01">Monto base</label>
                             </div>
-                            <input id="txttotal" name="impuesto" readonly type="text" class="form-control" value="0">
+                            <input id="txtigv" name="impuesto" readonly type="text" class="form-control" value="0">
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -322,7 +322,7 @@
                             <div class="input-group-prepend">
                                 <label class="DataCustomer" for="inputGroupSelect01">IVA.</label>
                             </div>
-                            <input id="txtigv" name="impuesto" readonly type="text" class="form-control" value="0">
+                            <input id="txtiva" name="impuesto" readonly type="text" class="form-control" value="0">
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -330,7 +330,7 @@
                             <div class="form-group">
                                 <label class="DataCustomer" for="inputGroupSelect01">Total</label>
                             </div>
-                            <input id="txtsubtotal" name="totalpagado" readonly type="text" class="form-control" value="0">
+                            <input id="txttotal" name="totalpagado" readonly type="text" class="form-control" value="0">
                         </div>
                     </div>
 
@@ -493,14 +493,14 @@
                 subtotal += detalle.importeTotal;
             });
 
-            const igv = subtotal / 1.13; // IGV del 13%
-            const total = subtotal - igv;
+            const igv = subtotal / 1.13 // IGV del 13%
+            const iva = subtotal - igv
+            const total = subtotal
 
-            txtsubtotal.value = subtotal.toFixed(2);
             txtigv.value = igv.toFixed(2);
+            txtiva.value = iva.toFixed(2);
             txttotal.value = total.toFixed(2);
         }
-
         btncalcular.addEventListener("click", function () {
             const montoPago = parseFloat(txtmontopago.value);
             if (isNaN(montoPago) || montoPago < 0) {
