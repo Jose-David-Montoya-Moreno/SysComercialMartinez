@@ -17,7 +17,7 @@
 
 <h1>Creación de ventas</h1>
 
-<div class="card border-info">
+<div class="card border-info" style="width:98%">
     <h6 class="TextLitlle">Informacion del Cliente</h6>
     <div class="card-body">
         <div class="row align-items-star">
@@ -288,7 +288,7 @@
                             <div class="form-group">
                                 <label class="DataCustomer" for="inputGroupSelect01">Total</label>
                             </div>
-                            <input id="txtsubtotal" name="totalpagado" readonly type="text" class="form-control" value="0">
+                            <input id="txttotal" name="totalpagado" readonly type="text" class="form-control" value="0">
                         </div>
                     </div>
 
@@ -468,6 +468,7 @@
 
             const igv = subtotal / 1.13 // IGV del 13%
             const iva = subtotal - igv
+            const total = subtotal
 
             txtigv.value = igv.toFixed(2);
             txtiva.value = iva.toFixed(2);
