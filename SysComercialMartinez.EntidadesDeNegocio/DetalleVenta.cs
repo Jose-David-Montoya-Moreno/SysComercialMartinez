@@ -29,6 +29,7 @@ namespace SysComercialMartinez.EntidadesDeNegocio
         [Required(ErrorMessage = "la Cantidad es obligatorio")]
         public int Cantidad { get; set; }
 
+        [Required(ErrorMessage = "El descuento es obligatorio")]
         public decimal? Descuento { get; set; }
 
 

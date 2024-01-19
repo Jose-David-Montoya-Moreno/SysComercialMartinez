@@ -31,6 +31,7 @@ namespace SysComercialMartinez.AccesoADatos
                 detalleventa.IdVenta = pDetalleVenta.IdVenta;
                 detalleventa.Cantidad = pDetalleVenta.Cantidad;
                 detalleventa.ValorTotal = pDetalleVenta.ValorTotal;
+                detalleventa.Descuento = pDetalleVenta.Descuento;
                 bdContexto.Update(detalleventa);
                 result = await bdContexto.SaveChangesAsync();
             }

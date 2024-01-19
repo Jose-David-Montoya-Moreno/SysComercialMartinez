@@ -196,6 +196,7 @@
                             <th>Producto</th>
                             <th>Descripcion</th>
                             <th>Precio Unidad</th>
+                            <th>Descuento</th>
                             <th>Importe Total</th>
                             <th colspan="1">Borrar</th>
                         </tr>
@@ -221,8 +222,11 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Producto.PrecioUnitario)
                                 </td>
+                                 <td>
+                                    @Html.DisplayFor(modelItem => item.Descuento)
+                                </td>
                                 <td>
-                                   $ @Html.DisplayFor(modelItem => item.ValorTotal)
+                                    @Html.DisplayFor(modelItem => item.ValorTotal)
                                 </td>
 
                                 <td class="botonestabla">
@@ -357,43 +361,48 @@
 
         const detalleVentas = [];
 
-       agregarProductoButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-        const productoid = button.getAttribute("data-productoid");
-        const codigo = button.getAttribute("data-codigo");
-        const nombre = button.getAttribute("data-nombre");
-        const descripcion = button.getAttribute("data-descripcion");
-        const stock = parseFloat(button.getAttribute("data-stock"));
-        const precio = parseFloat(button.getAttribute("data-precio"));
+        agregarProductoButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                const productoid = button.getAttribute("data-productoid");
+                const codigo = button.getAttribute("data-codigo");
+                const nombre = button.getAttribute("data-nombre");
+                const descripcion = button.getAttribute("data-descripcion");
+                const stock = parseFloat(button.getAttribute("data-stock"));
+                const precio = parseFloat(button.getAttribute("data-precio"));
 
                 const cantidad = prompt(`Ingrese la cantidad para "${nombre}"`);
                 const descuento = prompt(`Ingrese el descuento para "${nombre}"`);
 
-                // Verifica si el campo de descuento está vacío y asigna 0 en ese caso
-                const descuentoValue = descuento !== null && descuento !== "" ? parseFloat(descuento) : 0;
+                // Verifica si el usuario ha ingresado valores y no ha cancelado
+                if (cantidad !== null && descuento !== null) {
+                    // Convierte los valores a números y maneja cancelación
+                    const cantidadValue = parseFloat(cantidad);
+                    const descuentoValue = descuento !== "" ? parseFloat(descuento) : 0;
 
-                if (cantidad !== null && !isNaN(cantidad) && !isNaN(descuentoValue)) {
-                    let cantidadValue = parseFloat(cantidad);
-
-                    if (cantidadValue > 0 && cantidadValue <= stock) {
-                        let precioConDescuento = precio - (precio * (descuentoValue / 100));
-                        agregarProducto(productoid, codigo, nombre, descripcion, cantidadValue, precioConDescuento);
+                    // Verifica si los valores son válidos antes de continuar
+                    if (!isNaN(cantidadValue) && !isNaN(descuentoValue)) {
+                        if (cantidadValue > 0 && cantidadValue <= stock) {
+                            // Calcula el importe total
+                            const importeTotal = cantidadValue * precio - (descuentoValue / 100) * precio;
+                            agregarProducto(productoid, codigo, nombre, descripcion, cantidadValue, precio, descuentoValue, importeTotal);
+                        } else {
+                            alert("La cantidad deseada no se encuentra en stock");
+                        }
                     } else {
-                        alert("La cantidad deseada no se encuentra en stock");
+                        alert("Ingrese valores numéricos válidos para cantidad y descuento.");
                     }
                 }
+            });
+        });
 
-    });
-});
-
-        function agregarProducto(productoid, codigo, nombre, descripcion, cantidad, precio) {
-            const importeTotal = parseFloat(cantidad) * precio;
+        function agregarProducto(productoid, codigo, nombre, descripcion, cantidad, precio, descuento, importeTotal) {
             detalleVentas.push({
                 productoid: productoid,
                 codigo: codigo,
                 nombre: nombre,
                 descripcion: descripcion,
                 cantidad: parseFloat(cantidad),
+                descuento: parseFloat(descuento),
                 precio: precio,
                 importeTotal: importeTotal,
             });
@@ -401,7 +410,6 @@
             calculateTotal();
         }
 
-        
 
         eliminarProductoButtons.forEach(function (button) {
             button.addEventListener("click", function () {
@@ -430,9 +438,10 @@
                             <td><input name='detalleVentas[${indeceFila}].Cantidad' value='${detalle.cantidad}'  readonly="readonly" class="SiguientesColumnas" /></td>
                             <td><input name='detalleVentas[${indeceFila}].Nombre' value='${detalle.nombre}'  readonly="readonly" class="SiguientesColumnas"/></td>
                             <td><input name='detalleVentas[${indeceFila}].Descripcion' value='${detalle.descripcion}'  readonly="readonly" class="SiguientesColumnas" /></td>
-                            <td><input name='detalleVentas[${indeceFila}].Precio' value='${ detalle.precio}'  readonly="readonly" class="SiguientesColumnas"/></td>
-                            <td><input name='detalleVentas[${indeceFila}].ValorTotal' value='${detalle.importeTotal}'  readonly="readonly" class="SiguientesColumnas" /></td>
-                            <td>
+    <td>$<span>${detalle.precio}</span><input type="hidden" name='detalleVentas[${indeceFila}].Precio' value='${detalle.precio}' /></td>
+    <td><span>${detalle.descuento}</span>%<input type="hidden" name='detalleVentas[${indeceFila}].Descuento' value='${detalle.descuento}' /></td>
+    <td>$<span>${detalle.importeTotal}</span><input type="hidden" name='detalleVentas[${indeceFila}].ValorTotal' value='${detalle.importeTotal}' /></td>
+                                <td>
                                 <button class="eliminar-producto btn btn-danger" data-index="${index}">
                                     <i class="fas fa-trash"></i>
                                 </button>

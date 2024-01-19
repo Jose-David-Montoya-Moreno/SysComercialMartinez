@@ -48,7 +48,7 @@ namespace SysComercialMartinez.EntidadesDeNegocio
         public decimal? Total { get; set; }
         [Display(Name = "Descuento")]
         [Required(ErrorMessage = "El campo Descuento es obligatorio.")]
-        [Range(0.01, 10000, ErrorMessage = "El campo Precio debe estar entre 0.01 y 10,000.")]
+        [Range(0.00, 10000, ErrorMessage = "El campo Precio debe estar entre 0.01 y 10,000.")]
         public decimal? Descuento { get; set; }
         [Display(Name = "Impuesto")]
         [Required(ErrorMessage = "El campo Impuesto es obligatorio.")]
