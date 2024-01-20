@@ -168,5 +168,29 @@
 }
 
 <!-- Asegúrate de incluir este script después de cargar jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+<script>
+    $(document).ready(function () {
+        // Función para calcular el precio unitario
+        function calcularPrecioUnitario() {
+            // Obtener los valores de PrecioCompra y Porcentaje
+            var precioCompra = parseFloat($("#PrecioCompra").val()) || 0;
+            var porcentaje = parseFloat($("#Porcentaje").val()) || 0;
 
+            // Calcular el precio unitario
+            var precioUnitario = precioCompra + (precioCompra * (porcentaje / 100));
+
+            // Mostrar el resultado en el campo PrecioUnitario
+            $("#PrecioUnitario").val(precioUnitario.toFixed(2));
+        }
+
+        // Llamar a la función cuando cambie el valor de PrecioCompra o Porcentaje
+        $("#PrecioCompra, #Porcentaje").on("input", function () {
+            calcularPrecioUnitario();
+        });
+
+        // Inicializar el cálculo al cargar la página
+        calcularPrecioUnitario();
+    });
+</script>

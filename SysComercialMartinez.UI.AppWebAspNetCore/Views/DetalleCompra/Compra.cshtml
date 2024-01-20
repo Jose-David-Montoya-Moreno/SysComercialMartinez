@@ -69,30 +69,11 @@
 
 
 
-<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModalx" data-bs-whatever="">
- <i class="fas fa-plus"></i>   Agregar Producto
+<button type="button" class="btn btn-success" onclick="window.location.href='@Url.Action("Create" , "Producto")'">
+    <i class="fas fa-plus"></i> Agregar Producto
 </button>
 
 
-<div class="modal fade" id="exampleModalx" tabindex="-1" role="dialog" aria - labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                    Crear Producto
-                </h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                </button>
-            </div>
-            <div class="modal-body">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal"> Cerrar </button>
-                
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <div class="row">
@@ -612,21 +593,7 @@
     });
 
 
-    //modal de producto
-    var exampleModalx = document.getElementById('exampleModalx');
-    exampleModalx.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget;
-        var recipient = button.getAttribute('data-bs-whatever');
-
-        $.get('/Producto/Create', function (data) {
-            var modalTitle = exampleModal.querySelector('.modal-title');
-            modalTitle.textContent = 'Producto' + recipient;
-
-            var modalBody = exampleModalx.querySelector('.modal-body');
-            modalBody.innerHTML = data;
-        });
-    });
-
+   
 
 </script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
